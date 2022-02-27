@@ -9,4 +9,9 @@ public class CardTest {
     Card ace = new Card("Club", "Ace");
     assertThat(ace.getSuit()).isEqualTo("Club");
   }
+  @Test
+  void numberTest(){
+    Card ace = new Card("Club", "Ace");
+    assertThat(ace.getNumber()).isEqualTo("Ace");
+  }
 }
