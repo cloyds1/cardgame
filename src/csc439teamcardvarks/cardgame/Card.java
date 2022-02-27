@@ -40,6 +40,6 @@ public class Card {
   }
 
   public String toString(){
-    return "";
+    return number + " of " + suit;
   }
 }

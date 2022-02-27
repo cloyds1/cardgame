@@ -1,17 +1,29 @@
 import csc439teamcardvarks.cardgame.Card;
 import static com.google.common.truth.Truth.assertThat;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CardTest {
 
+    Card ace;
+    @BeforeEach
+    void setup(){
+      ace = new Card("Clubs", "Ace");
+    }
+
   @Test
   void suitTest(){
-    Card ace = new Card("Club", "Ace");
-    assertThat(ace.getSuit()).isEqualTo("Club");
+    assertThat(ace.getSuit()).isEqualTo("Clubs");
   }
+
   @Test
   void numberTest(){
-    Card ace = new Card("Club", "Ace");
     assertThat(ace.getNumber()).isEqualTo("Ace");
+  }
+
+  @Test
+  void toStringTest(){
+    assertThat(ace.toString()).isEqualTo("Ace of Clubs");
   }
 }
