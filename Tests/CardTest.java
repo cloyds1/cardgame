@@ -23,6 +23,11 @@ public class CardTest {
   }
 
   @Test
+  void valueTest(){
+      assertThat(ace.getValue()).isEqualTo(11);
+  }
+
+  @Test
   void toStringTest(){
     assertThat(ace.toString()).isEqualTo("Ace of Clubs");
   }
