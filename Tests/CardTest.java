@@ -24,7 +24,7 @@ public class CardTest {
 
   @Test
   void valueTest(){
-      assertThat(ace.getValue()).isEqualTo(11);
+      assertThat(ace.getValue()).isEqualTo(14);
   }
 
   @Test

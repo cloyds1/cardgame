@@ -17,12 +17,22 @@ public class Card {
     this.suit = suit;
     this.number = number;
 
-    if (number.equals("King") || number.equals("Queen") || number.equals("Jack")) {
-      this.value = 10;
-    } else if (number.equals("Ace")) {
-      this.value = 11;
-    } else {
-      this.value = Integer.parseInt(number);
+    switch (number) {
+      case "Ace":
+        this.value = 14;
+        break;
+      case "King":
+        this.value = 13;
+        break;
+      case "Queen":
+        this.value = 12;
+        break;
+      case "Jack":
+        this.value = 11;
+        break;
+      default:
+        this.value = Integer.parseInt(number);
+        break;
     }
   }
 
@@ -44,6 +54,24 @@ public class Card {
 
   public void setNumber(String number) {
     this.number = number;
+
+    switch (number) {
+      case "Ace":
+        this.value = 14;
+        break;
+      case "King":
+        this.value = 13;
+        break;
+      case "Queen":
+        this.value = 12;
+        break;
+      case "Jack":
+        this.value = 11;
+        break;
+      default:
+        this.value = Integer.parseInt(number);
+        break;
+    }
   }
 
   public void setValue(int value) {
