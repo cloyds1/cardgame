@@ -2,7 +2,7 @@ package csc439teamcardvarks.cardgame;
 
 /**
  *CSC 439 - Software Testing and Maintenance
- *@author Ellen Hokannen
+ *@author Ellen Hokkanen
  *@version 1.0
  */
 public class Main {

@@ -1,3 +1,4 @@
+import com.google.common.annotations.VisibleForTesting;
 import csc439teamcardvarks.cardgame.Card;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -32,5 +33,11 @@ public class CardTest {
   @Test
   void toStringTest() {
     assertThat(ace.toString()).isEqualTo("Ace of Clubs");
+  }
+
+  @Test
+  void compareToTest(){
+    Card three = new Card("Hearts", "3");
+    assertThat(ace.compareTo(three)).isEqualTo(1);
   }
 }

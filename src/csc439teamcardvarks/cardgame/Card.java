@@ -2,7 +2,7 @@ package csc439teamcardvarks.cardgame;
 
 /**
  *CSC 439 - Software Testing and Maintenance
- *@author Ellen Hokannen
+ *@author Ellen Hokkanen
  *@version 1.0
  */
 public class Card {
@@ -92,6 +92,8 @@ public class Card {
     return number + " of " + suit;
   }
 
-  public int compareTo(){return 0;}
+  public int compareTo(Card c){
+    return Integer.compare(this.value, c.value);
+  }
 }
 
