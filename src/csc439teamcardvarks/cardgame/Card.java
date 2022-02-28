@@ -91,4 +91,7 @@ public class Card {
   public String toString() {
     return number + " of " + suit;
   }
+
+  public int compareTo(){return 0;}
 }
+
