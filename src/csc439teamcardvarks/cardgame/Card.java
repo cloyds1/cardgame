@@ -88,6 +88,7 @@ public class Card {
     return false;
   }
 
+  @Override
   public String toString() {
     return number + " of " + suit;
   }
