@@ -6,6 +6,7 @@ package csc439teamnarwhal.cardgame;
  * @author Clinton Schultz
  * @author Ellen Hokkanen
  * @author Michael Koch
+ * @author Sean Cloyd
  * @version 1.0
  */
 public class Card {
