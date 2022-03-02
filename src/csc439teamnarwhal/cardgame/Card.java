@@ -34,6 +34,7 @@ public class Card {
     this.suit = suit;
     this.number = number;
 
+    //Revision note: Implement a singleton class to handle input, replace string attributes with ints.
     switch (number) {
       case "Ace":
         this.value = 14;
