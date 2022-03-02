@@ -1,4 +1,4 @@
-package csc439teamcardvarks.cardgame;
+package csc439teamnarwhal.cardgame;
 
 /**
  *CSC 439 - Software Testing and Maintenance

@@ -1,5 +1,4 @@
-import com.google.common.annotations.VisibleForTesting;
-import csc439teamcardvarks.cardgame.Card;
+import csc439teamnarwhal.cardgame.Card;
 
 import static com.google.common.truth.Truth.assertThat;
 
