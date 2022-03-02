@@ -80,7 +80,24 @@ public class CardTest {
   }
 
   @Test
+  void setValue(){
+    ace.setValue(0);
+    assertThat(ace.getValue()).isEqualTo(0);
+  }
+
+  @Test
   void compareToTest() {
     assertThat(ace.compareTo(three)).isEqualTo(1);
+  }
+
+  @Test
+  void equalCardsTestTrue(){
+    Card newAce = new Card("Clubs", "Ace");
+    assertThat(ace.equals(newAce)).isTrue();
+  }
+  @Test
+  void equalCardsTestFalse(){
+    Card newAce = new Card("Clubs", "Ace");
+    assertThat(ace.equals(three)).isFalse();
   }
 }

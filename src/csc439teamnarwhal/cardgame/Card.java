@@ -13,8 +13,11 @@ public class Card {
   private int value;
 
   /**
+   * This constructor creates a playing card with a suit and number. It also creates the value of
+   * the card based on 1, 2,...A with values 1-14
+   *
    * @param suit   parameter for the suit of the card
-   * @param number parameter for the number of the card (A, 1, 2... to K)
+   * @param number parameter for the number of the card (1, 2... to A)
    */
   public Card(String suit, String number) {
     this.suit = suit;
@@ -49,6 +52,10 @@ public class Card {
 
   public int getValue() {
     return value;
+  }
+
+  public void setValue(int value) {
+    this.value = value;
   }
 
   /**
@@ -88,6 +95,16 @@ public class Card {
    */
   public int compareTo(Card c) {
     return Integer.compare(this.value, c.value);
+  }
+
+  /**
+   * This method compares two cards to see if they are the same suit and number
+   *
+   * @param c parameter for the card we are comparing to
+   * @return true if cards are the same, return false if cards are different
+   */
+  public boolean equals(Card c) {
+    return this.suit.equals(c.suit) && this.number.equals(c.number);
   }
 }
 
