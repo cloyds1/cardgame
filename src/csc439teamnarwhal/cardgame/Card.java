@@ -3,6 +3,14 @@ package csc439teamnarwhal.cardgame;
 /**
  * CSC 439 - Software Testing and Maintenance Lab 4
  *
+ * This class creates a card object with a suit and number and has the following properties:
+ * Methods isRed() and isBlack() that returns a boolean value depending on the color of the
+ * suit of the card, a toString() method that returns a String with the information about the
+ * card, a compareTo() method that compares the numbers of two cards and returns an integer
+ * value 1 if greater than, 0 if equal, and -1 if less than, and an equals() method that returns
+ * a boolean value of true if the cards are considered equal.
+ *
+ *
  * @author Clinton Schultz
  * @author Ellen Hokkanen
  * @author Michael Koch
