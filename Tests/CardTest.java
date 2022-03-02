@@ -8,10 +8,20 @@ import org.junit.jupiter.api.Test;
 public class CardTest {
 
   Card ace;
+  Card king;
+  Card queen;
+  Card jack;
+  Card ten;
+  Card three;
 
   @BeforeEach
   void setup() {
     ace = new Card("Clubs", "Ace");
+    king = new Card("Spades", "King");
+    queen = new Card("Clubs", "Queen");
+    jack = new Card("Clubs", "Jack");
+    ten = new Card("Hearts", "10");
+    three = new Card("Diamonds", "3");
   }
 
   @Test
@@ -25,8 +35,33 @@ public class CardTest {
   }
 
   @Test
-  void valueTest() {
+  void valueTestAce() {
     assertThat(ace.getValue()).isEqualTo(14);
+  }
+
+  @Test
+  void valueTestKing() {
+    assertThat(king.getValue()).isEqualTo(13);
+  }
+
+  @Test
+  void valueTestQueen() {
+    assertThat(queen.getValue()).isEqualTo(12);
+  }
+
+  @Test
+  void valueTestJack() {
+    assertThat(jack.getValue()).isEqualTo(11);
+  }
+
+  @Test
+  void valueTestTen() {
+    assertThat(ten.getValue()).isEqualTo(10);
+  }
+
+  @Test
+  void valueTestThree() {
+    assertThat(three.getValue()).isEqualTo(3);
   }
 
   @Test
@@ -35,8 +70,17 @@ public class CardTest {
   }
 
   @Test
-  void compareToTest(){
-    Card three = new Card("Hearts", "3");
+  void isRedTest() {
+    assertThat(ace.isRed()).isFalse();
+  }
+
+  @Test
+  void isBlackTest() {
+    assertThat(ace.isBlack()).isTrue();
+  }
+
+  @Test
+  void compareToTest() {
     assertThat(ace.compareTo(three)).isEqualTo(1);
   }
 }
