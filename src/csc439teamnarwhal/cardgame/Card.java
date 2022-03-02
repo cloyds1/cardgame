@@ -3,6 +3,7 @@ package csc439teamnarwhal.cardgame;
 /**
  * CSC 439 - Software Testing and Maintenance Lab 4
  *
+ * @author Clinton Schultz
  * @author Ellen Hokkanen
  * @version 1.0
  */
