@@ -8,12 +8,12 @@ public class Player {
     private String name;
 
     public Player(String name){
-        hand = new ArrayList<>();
+        hand = null;
         this.name = name;
     }
 
-    public void acceptCards(){
-
+    public void acceptCards(ArrayList<Card> hand){
+        this.hand = hand;
     }
 
 }
