@@ -1,8 +1,6 @@
 package csc439teamnarwhal.cardgame;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class Deck {
 
@@ -36,7 +34,7 @@ public class Deck {
       for(Player player: players) {
 
         //slice a portion of cards from the deck for a player
-        ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
+        ArrayList<Card> hand = new ArrayList<>(deckShoe.subList(0, 5));
 
         //remove entire slice from deck
         for (int i = 0; i < 6; i++)
