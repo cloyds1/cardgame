@@ -29,7 +29,13 @@ public class Deck {
   }
 
   public void dealCards(ArrayList<Player> players){
+    /*
+        players > 4, then create two decks for a shoe, merging two decks into one arraylist
 
+        draw 6 from the shoe/deck, add to each player
+
+        randomly flip
+     */
   }
 
 }
