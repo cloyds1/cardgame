@@ -31,15 +31,15 @@ public class Deck {
 
       for(Player player: players) {
 
+        //slice a portion of cards from the deck for a player
+        ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
+
         //remove entire slice from deck
         for (int i = 0; i < 6; i++)
           deckShoe.remove(i);
 
         //random object
         Random rand = new Random();
-
-        //slice a portion of cards from the deck for a player
-        ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
 
         //select a random card from the hand, set it to faceUp
         int tempInt = rand.nextInt(0, 5);
