@@ -51,7 +51,7 @@ public class DeckTest {
     testDeck.add(new Card(Rank.NINE, Suit.DIAMONDS));
     testDeck.add(new Card(Rank.THREE, Suit.CLUBS));
 
-    Collections.shuffle(testDeck);
+    //Collections.shuffle(testDeck);
     deckTest.dealCards(testPlayers, testDeck);
 
     assertThat(testPlayers.get(0).getHand().size()).isEqualTo(6);
