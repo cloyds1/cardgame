@@ -27,6 +27,7 @@ public class CardGameController {
     for (int i = 0; i < numPlayers; i++) {
       players.add(new Player("Player" + i));
     }
+
   }
 }
 
