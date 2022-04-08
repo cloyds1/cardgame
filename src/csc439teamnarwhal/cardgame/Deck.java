@@ -27,4 +27,9 @@ public class Deck {
     }
     return deck;
   }
+
+  public void dealCards(Player player1, Player player2, Player player3, Player player4){
+
+  }
+
 }
