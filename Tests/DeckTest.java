@@ -1,6 +1,7 @@
 import csc439teamnarwhal.cardgame.Deck;
 import csc439teamnarwhal.cardgame.Card;
 import static com.google.common.truth.Truth.assertThat;
+import java.util.Collections;
 
 import csc439teamnarwhal.cardgame.Rank;
 import csc439teamnarwhal.cardgame.Suit;
@@ -24,7 +25,7 @@ public class DeckTest {
   @Test
   void shuffleTest(){
     assertThat(deck.get(5).equals(deck2.get(5))).isTrue();
-    Deck.shuffle(deck);
+    Collections.shuffle(deck);
     assertThat(deck.get(5).equals(deck2.get(5))).isFalse();
   }
 }
