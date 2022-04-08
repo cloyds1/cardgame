@@ -1,8 +1,6 @@
 package csc439teamnarwhal.cardgame;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class Deck {
 
@@ -14,6 +12,10 @@ public class Deck {
         deckOfCards.add(new Card(r, s));
       }
     }
+  }
+
+  public Deck(ArrayList<Card> deck){
+    deckOfCards = deck;
   }
 
   public ArrayList<Card> getDeck() {
@@ -32,7 +34,7 @@ public class Deck {
       for(Player player: players) {
 
         //slice a portion of cards from the deck for a player
-        ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
+        ArrayList<Card> hand = new ArrayList<>(deckShoe.subList(0, 5));
 
         //remove entire slice from deck
         for (int i = 0; i < 6; i++)
@@ -42,12 +44,12 @@ public class Deck {
         Random rand = new Random();
 
         //select a random card from the hand, set it to faceUp
-        int tempInt = rand.nextInt(0, 5);
+        int tempInt = rand.nextInt(5);
         hand.get(tempInt).faceUp();
         Card tempCard = hand.remove(tempInt);
 
         //randomly select another, set it to face up, re-add other card
-        hand.get(rand.nextInt(0, 4)).faceUp();
+        hand.get(rand.nextInt(4)).faceUp();
         hand.add(tempInt, tempCard);
 
         //give the player the dealt cards
