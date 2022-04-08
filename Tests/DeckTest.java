@@ -23,9 +23,11 @@ public class DeckTest {
   @BeforeEach
   void initEach(){
 
-    deckTest = new Deck(testDeck);
+    deckTest = new Deck();
     testPlayers.add(new Player("player1"));
     testPlayers.add(new Player("player2"));
+    testPlayers.add(new Player("player3"));
+    testPlayers.add(new Player("player4"));
 
     testDeck.add(new Card(Rank.ACE, Suit.CLUBS));
     testDeck.add(new Card(Rank.JACK, Suit.HEARTS));
@@ -59,7 +61,7 @@ public class DeckTest {
   void dealCards() {
 
     Collections.shuffle(testDeck);
-    deckTest.dealCards(testPlayers, testDeck);
+    deckTest.dealCards(testPlayers);
 
     assertThat(testPlayers.get(0).getHand().size()).isEqualTo(6);
 
@@ -69,7 +71,7 @@ public class DeckTest {
   void dealCardsTwoUp() {
 
     Collections.shuffle(testDeck);
-    deckTest.dealCards(testPlayers, testDeck);
+    deckTest.dealCards(testPlayers);
 
     int faceDownCount = 0;
     int faceUpCount = 0;
@@ -97,6 +99,14 @@ public class DeckTest {
     assertThat(faceDownCount).isEqualTo(4);
     assertThat(faceUpCount).isEqualTo(2);
 
+    System.out.println(deckTest.getDeck().size());
+
+    for(Player player: testPlayers) {
+      for (Card card : player.getHand())
+        System.out.print(card.toString());
+      System.out.println("\n");
+
+    }
   }
 
 }
