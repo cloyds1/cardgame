@@ -2,7 +2,6 @@ package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class CardGameController {
 
