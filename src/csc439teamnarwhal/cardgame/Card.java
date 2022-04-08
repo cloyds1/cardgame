@@ -22,6 +22,7 @@ public class Card {
   private String suit;
   private String rank_name;
   private int rank_value;
+  private boolean faceUp;
 
   /**
    * This constructor creates a playing card with a suit and number. It also creates the value of
@@ -34,6 +35,8 @@ public class Card {
     this.suit = suit.getSuit();
     rank_name = rank.getName();
     rank_value = rank.getValue();
+    faceUp = false;
+
   }
 
   public String getSuit() {
