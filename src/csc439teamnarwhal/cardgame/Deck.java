@@ -29,24 +29,31 @@ public class Deck {
         insert previous card back into list.
      */
 
-    //random object
-    Random rand = new Random();
+      for(Player player: players) {
 
-    //slice a portion of cards from the deck for a player
-    ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
+        //remove entire slice from deck
+        for (int i = 0; i < 6; i++)
+          deckShoe.remove(i);
 
-    //select a random card from the hand, set it to faceUp
-    int tempInt = rand.nextInt(0, 5);
-    hand.get(tempInt).faceUp();
-    Card tempCard = hand.remove(tempInt);
+        //random object
+        Random rand = new Random();
 
-    hand.get(rand.nextInt(0, 4)).faceUp();
-    hand.add(tempInt, tempCard);
+        //slice a portion of cards from the deck for a player
+        ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
 
+        //select a random card from the hand, set it to faceUp
+        int tempInt = rand.nextInt(0, 5);
+        hand.get(tempInt).faceUp();
+        Card tempCard = hand.remove(tempInt);
 
+        //randomly select another, set it to face up, re-add other card
+        hand.get(rand.nextInt(0, 4)).faceUp();
+        hand.add(tempInt, tempCard);
 
+        //give the player the dealt cards
+        player.acceptCards(hand);
 
-
+    }
   }
 
 }
