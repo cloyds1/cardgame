@@ -2,6 +2,7 @@ package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class CardGameController {
 
@@ -9,6 +10,7 @@ public class CardGameController {
   ArrayList<Player> players = new ArrayList<>();
   Deck deck = new Deck();
   int numPlayers = 0;
+  int playerTurn = 1;
 
 
   public void gameSetup() {
@@ -24,6 +26,19 @@ public class CardGameController {
     if (numPlayers > 4) {
       createDoubleDeck();
     }
+    Collections.shuffle(deck.getDeck());
+    createPlayers(numPlayers, players);
+    deck.dealCards(players);
+    System.out.println();
+    for(int i = 0; i < deck.getDeck().size(); i++) {
+      System.out.println(deck.getDeck().get(i));
+    }
+  }
+
+  public void playGame(){
+
+    view.setText("It is Player" + playerTurn +"'s Turn");
+    view.setText("");
   }
 
   public void createPlayers(int numPlayers, ArrayList<Player> players) {
@@ -35,11 +50,8 @@ public class CardGameController {
   public void createDoubleDeck() {
     Deck deck2 = new Deck();
     deck.getDeck().addAll(deck2.getDeck());
-    Collections.shuffle(deck.getDeck());
-    for (int i = 0; i < deck.getDeck().size(); i++) {
-      System.out.println(deck.getDeck().get(i));
-    }
   }
+
 }
 
  /* CountModel model = new CountModel(0);
