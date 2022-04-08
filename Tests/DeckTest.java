@@ -1,6 +1,7 @@
 import csc439teamnarwhal.cardgame.*;
 
 import static com.google.common.truth.Truth.assertThat;
+import java.util.Collections;
 
 import java.util.ArrayList;
 import java.util.Collections;
