@@ -9,6 +9,11 @@ public class CardGameControllerTest {
   CardGameController controller = new CardGameController();
   ArrayList<Player> players = new ArrayList<>();
   @Test
+  void gameSetupTest(){
+    controller.gameSetup();
+  }
+
+  @Test
   void createPlayersTest(){
     controller.createPlayers(5, players);
     assertThat(players.get(3).getName()).isEqualTo("Player4");

@@ -10,22 +10,20 @@ import org.junit.jupiter.api.Test;
 
 public class DeckTest {
 
-  Deck newDeck = new Deck();
-  Deck newDeck2 = new Deck();
-  ArrayList<Card> deck = newDeck.getDeck();
-  ArrayList<Card> deck2 = newDeck2.getDeck();
+  Deck deck = new Deck();
+  Deck deck2 = new Deck();
 
   @Test
   void deckCreationTest() {
     Card fiveClubs = new Card(Rank.FIVE, Suit.CLUBS);
-    assertThat(deck.get(4).equals(fiveClubs)).isTrue();
+    assertThat(deck.getDeck().get(4).equals(fiveClubs)).isTrue();
   }
 
   @Test
   void shuffleTest(){
-    assertThat(deck.get(5).equals(deck2.get(5))).isTrue();
-    Collections.shuffle(deck);
-    assertThat(deck.get(5).equals(deck2.get(5))).isFalse();
+    assertThat(deck.getDeck().get(5).equals(deck2.getDeck().get(5))).isTrue();
+    Collections.shuffle(deck.getDeck());
+    assertThat(deck.getDeck().get(5).equals(deck2.getDeck().get(5))).isFalse();
   }
 
   @Test

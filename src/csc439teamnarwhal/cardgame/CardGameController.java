@@ -1,7 +1,7 @@
 package csc439teamnarwhal.cardgame;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CardGameController {
 
@@ -21,16 +21,26 @@ public class CardGameController {
       view.setInput();
       numPlayers = Integer.parseInt(view.getNumPlayers());
     }
+    if (numPlayers > 4) {
+      createDoubleDeck();
+    }
   }
 
   public void createPlayers(int numPlayers, ArrayList<Player> players) {
     for (int i = 1; i <= numPlayers; i++) {
       players.add(new Player("Player" + i));
     }
+  }
 
+  public void createDoubleDeck() {
+    Deck deck2 = new Deck();
+    deck.getDeck().addAll(deck2.getDeck());
+    Collections.shuffle(deck.getDeck());
+    for (int i = 0; i < deck.getDeck().size(); i++) {
+      System.out.println(deck.getDeck().get(i));
+    }
   }
 }
-
 
  /* CountModel model = new CountModel(0);
   CountView view = new CountView();
