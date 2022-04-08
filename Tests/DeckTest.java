@@ -6,36 +6,28 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DeckTest {
 
-  Deck deck = new Deck();
-  Deck deck2 = new Deck();
+  ArrayList<Card> testDeck = new ArrayList<>();
+  ArrayList<Player> testPlayers = new ArrayList<Player>();
+  Deck deckTest;
 
-  @Test
-  void deckCreationTest() {
-    Card fiveClubs = new Card(Rank.FIVE, Suit.CLUBS);
-    assertThat(deck.getDeck().get(4).equals(fiveClubs)).isTrue();
-  }
+  Deck newDeck = new Deck();
+  Deck newDeck2 = new Deck();
+  ArrayList<Card> deck = newDeck.getDeck();
+  ArrayList<Card> deck2 = newDeck2.getDeck();
 
-  @Test
-  void shuffleTest(){
-    assertThat(deck.getDeck().get(5).equals(deck2.getDeck().get(5))).isTrue();
-    Collections.shuffle(deck.getDeck());
-    assertThat(deck.getDeck().get(5).equals(deck2.getDeck().get(5))).isFalse();
-  }
+  @BeforeEach
+  void initEach(){
 
-  @Test
-  void dealCards() {
-
-    ArrayList<Card> testDeck = new ArrayList<>();
-    ArrayList<Player> testPlayers = new ArrayList<Player>();
-
+    deckTest = new Deck();
     testPlayers.add(new Player("player1"));
     testPlayers.add(new Player("player2"));
-
-    Deck deckTest = new Deck(testDeck);
+    testPlayers.add(new Player("player3"));
+    testPlayers.add(new Player("player4"));
 
     testDeck.add(new Card(Rank.ACE, Suit.CLUBS));
     testDeck.add(new Card(Rank.JACK, Suit.HEARTS));
@@ -50,10 +42,71 @@ public class DeckTest {
     testDeck.add(new Card(Rank.NINE, Suit.DIAMONDS));
     testDeck.add(new Card(Rank.THREE, Suit.CLUBS));
 
+  }
+
+  @Test
+  void deckCreationTest() {
+    Card fiveClubs = new Card(Rank.FIVE, Suit.CLUBS);
+    assertThat(deck.get(4).equals(fiveClubs)).isTrue();
+  }
+
+  @Test
+  void shuffleTest(){
+    assertThat(deck.get(5).equals(deck2.get(5))).isTrue();
+    Collections.shuffle(deck);
+    assertThat(deck.get(5).equals(deck2.get(5))).isFalse();
+  }
+
+  @Test
+  void dealCards() {
+
     Collections.shuffle(testDeck);
-    deckTest.dealCards(testPlayers, testDeck);
+    deckTest.dealCards(testPlayers);
 
     assertThat(testPlayers.get(0).getHand().size()).isEqualTo(6);
 
   }
+
+  @Test
+  void dealCardsTwoUp() {
+
+    Collections.shuffle(testDeck);
+    deckTest.dealCards(testPlayers);
+
+    int faceDownCount = 0;
+    int faceUpCount = 0;
+
+    for(Card card: testPlayers.get(0).getHand()){
+      if(card.getFaceUp())
+        faceUpCount++;
+      else
+        faceDownCount++;
+    }
+
+    assertThat(faceDownCount).isEqualTo(4);
+    assertThat(faceUpCount).isEqualTo(2);
+
+    faceDownCount = 0;
+    faceUpCount = 0;
+
+    for(Card card: testPlayers.get(1).getHand()){
+      if(card.getFaceUp())
+        faceUpCount++;
+      else
+        faceDownCount++;
+    }
+
+    assertThat(faceDownCount).isEqualTo(4);
+    assertThat(faceUpCount).isEqualTo(2);
+
+    System.out.println(deckTest.getDeck().size());
+
+    for(Player player: testPlayers) {
+      for (Card card : player.getHand())
+        System.out.print(card.toString());
+      System.out.println("\n");
+
+    }
+  }
+
 }
