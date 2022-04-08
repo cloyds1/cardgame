@@ -17,4 +17,14 @@ public class Deck {
   public ArrayList<Card> getDeck() {
     return deckOfCards;
   }
+
+  public static ArrayList<Card> shuffle(ArrayList<Card> deck){
+    for(int i = 0; i < deck.size(); i++){
+      int cardSwap = (int)(Math.random() * deck.size());
+      Card temp = deck.get(i);
+      deck.set(i, deck.get(cardSwap));
+      deck.set(cardSwap, temp);
+    }
+    return deck;
+  }
 }
