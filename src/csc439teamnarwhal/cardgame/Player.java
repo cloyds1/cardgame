@@ -6,7 +6,7 @@ public class Player {
 
     private ArrayList<Card> hand;
 
-    public Player(String name){
+    public Player(){
         hand = null;
     }
 
@@ -14,4 +14,7 @@ public class Player {
         this.hand = hand;
     }
 
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
 }
