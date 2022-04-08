@@ -1,5 +1,7 @@
 package csc439teamnarwhal.cardgame;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * CSC 439 - Software Testing and Maintenance
  *
@@ -13,7 +15,9 @@ public class Main {
    * @param args parameters for main method
    */
   public static void main(String[] args) {
-    //main method items go here
+    CardGameController controller = new CardGameController();
+    controller.gameSetup();
+
   }
 
 }
