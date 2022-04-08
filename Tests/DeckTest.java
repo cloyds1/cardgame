@@ -6,6 +6,7 @@ import java.util.Collections;
 import csc439teamnarwhal.cardgame.Rank;
 import csc439teamnarwhal.cardgame.Suit;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
