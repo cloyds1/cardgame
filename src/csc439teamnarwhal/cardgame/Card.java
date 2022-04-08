@@ -20,54 +20,32 @@ package csc439teamnarwhal.cardgame;
 public class Card {
 
   private String suit;
-  private String number;
-  private int value;
+  private String rank_name;
+  private int rank_value;
 
   /**
    * This constructor creates a playing card with a suit and number. It also creates the value of
    * the card based on 1, 2,...A with values 1-14
    *
    * @param suit   parameter for the suit of the card
-   * @param number parameter for the number of the card (1, 2... to A)
+   * @param rank  parameter for the number of the card (1, 2... to A)
    */
-  public Card(String suit, String number) {
-    this.suit = suit;
-    this.number = number;
-
-    //Revision note: Implement a singleton class to handle input, replace string attributes with ints.
-    switch (number) {
-      case "Ace":
-        this.value = 14;
-        break;
-      case "King":
-        this.value = 13;
-        break;
-      case "Queen":
-        this.value = 12;
-        break;
-      case "Jack":
-        this.value = 11;
-        break;
-      default:
-        this.value = Integer.parseInt(number);
-        break;
-    }
+  public Card(Rank rank, Suit suit) {
+    this.suit = suit.getSuit();
+    rank_name = rank.getName();
+    rank_value = rank.getValue();
   }
 
   public String getSuit() {
     return suit;
   }
 
-  public String getNumber() {
-    return number;
+  public String getRank_name() {
+    return rank_name;
   }
 
-  public int getValue() {
-    return value;
-  }
-
-  public void setValue(int value) {
-    this.value = value;
+  public int getRank_value() {
+    return rank_value;
   }
 
   /**
@@ -95,7 +73,7 @@ public class Card {
    */
   @Override
   public String toString() {
-    return number + " of " + suit;
+    return rank_name + " of " + suit;
   }
 
   /**
@@ -106,7 +84,7 @@ public class Card {
    * @return 1 if greater than, 0 if equal, -1 if less than
    */
   public int compareTo(Card c) {
-    return Integer.compare(this.value, c.value);
+    return Integer.compare(this.rank_value, c.rank_value);
   }
 
   /**
@@ -116,7 +94,7 @@ public class Card {
    * @return true if cards are the same, return false if cards are different
    */
   public boolean equals(Card c) {
-    return this.suit.equals(c.suit) && this.number.equals(c.number);
+    return this.suit.equals(c.suit) && this.rank_name.equals(c.rank_name);
   }
 }
 
