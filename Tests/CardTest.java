@@ -2,6 +2,8 @@ import csc439teamnarwhal.cardgame.Card;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import csc439teamnarwhal.cardgame.Rank;
+import csc439teamnarwhal.cardgame.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,12 +18,12 @@ public class CardTest {
 
   @BeforeEach
   void setup() {
-    ace = new Card("Clubs", "Ace");
-    king = new Card("Spades", "King");
-    queen = new Card("Clubs", "Queen");
-    jack = new Card("Clubs", "Jack");
-    ten = new Card("Hearts", "10");
-    three = new Card("Diamonds", "3");
+    ace = new Card(Rank.ACE, Suit.CLUBS);
+    king = new Card(Rank.KING, Suit.HEARTS);
+    queen = new Card(Rank.QUEEN, Suit.CLUBS);
+    jack = new Card(Rank.JACK, Suit.CLUBS);
+    ten = new Card(Rank.TEN, Suit.HEARTS);
+    three = new Card(Rank.THREE, Suit.DIAMONDS);
   }
 
   @Test
@@ -30,38 +32,38 @@ public class CardTest {
   }
 
   @Test
-  void numberTest() {
-    assertThat(ace.getNumber()).isEqualTo("Ace");
+  void nameTest() {
+    assertThat(ace.getRank_name()).isEqualTo("Ace");
   }
 
   @Test
   void valueTestAce() {
-    assertThat(ace.getValue()).isEqualTo(14);
+    assertThat(ace.getRank_value()).isEqualTo(1);
   }
 
   @Test
   void valueTestKing() {
-    assertThat(king.getValue()).isEqualTo(13);
+    assertThat(king.getRank_value()).isEqualTo(10);
   }
 
   @Test
   void valueTestQueen() {
-    assertThat(queen.getValue()).isEqualTo(12);
+    assertThat(queen.getRank_value()).isEqualTo(10);
   }
 
   @Test
   void valueTestJack() {
-    assertThat(jack.getValue()).isEqualTo(11);
+    assertThat(jack.getRank_value()).isEqualTo(10);
   }
 
   @Test
   void valueTestTen() {
-    assertThat(ten.getValue()).isEqualTo(10);
+    assertThat(ten.getRank_value()).isEqualTo(10);
   }
 
   @Test
   void valueTestThree() {
-    assertThat(three.getValue()).isEqualTo(3);
+    assertThat(three.getRank_value()).isEqualTo(3);
   }
 
   @Test
@@ -80,24 +82,18 @@ public class CardTest {
   }
 
   @Test
-  void setValue(){
-    ace.setValue(0);
-    assertThat(ace.getValue()).isEqualTo(0);
-  }
-
-  @Test
   void compareToTest() {
-    assertThat(ace.compareTo(three)).isEqualTo(1);
+    assertThat(ace.compareTo(three)).isEqualTo(-1);
   }
 
   @Test
   void equalCardsTestTrue(){
-    Card newAce = new Card("Clubs", "Ace");
+    Card newAce = new Card(Rank.ACE, Suit.CLUBS);
     assertThat(ace.equals(newAce)).isTrue();
   }
   @Test
   void equalCardsTestFalse(){
-    Card newAce = new Card("Clubs", "Ace");
+    Card newAce = new Card(Rank.ACE, Suit.CLUBS);
     assertThat(ace.equals(three)).isFalse();
   }
 }
