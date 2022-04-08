@@ -24,7 +24,7 @@ public class CardGameController {
   }
 
   public void createPlayers(int numPlayers, ArrayList<Player> players) {
-    for (int i = 0; i < numPlayers; i++) {
+    for (int i = 1; i <= numPlayers; i++) {
       players.add(new Player("Player" + i));
     }
 

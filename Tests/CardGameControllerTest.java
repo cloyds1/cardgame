@@ -11,7 +11,7 @@ public class CardGameControllerTest {
   @Test
   void createPlayersTest(){
     controller.createPlayers(5, players);
-    assertThat(players.get(3)).isEqualTo("Player4");
+    assertThat(players.get(3).getName()).isEqualTo("Player4");
   }
 
 

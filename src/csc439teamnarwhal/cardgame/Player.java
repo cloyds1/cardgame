@@ -16,6 +16,10 @@ public class Player {
         this.hand = hand;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public List<Card> getHand(){
         return hand;
     }
