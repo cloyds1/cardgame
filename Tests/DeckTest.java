@@ -5,6 +5,7 @@ import static com.google.common.truth.Truth.assertThat;
 import csc439teamnarwhal.cardgame.Rank;
 import csc439teamnarwhal.cardgame.Suit;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class DeckTest {
   @Test
   void shuffleTest(){
     assertThat(deck.get(5).equals(deck2.get(5))).isTrue();
-    Deck.shuffle(deck);
+    Collections.shuffle(deck);
     assertThat(deck.get(5).equals(deck2.get(5))).isFalse();
   }
 }

@@ -99,5 +99,12 @@ public class Card {
   public boolean equals(Card c) {
     return this.suit.equals(c.suit) && this.rank_name.equals(c.rank_name);
   }
+
+  public void faceUp(){faceUp = true;}
+
+  public void faceDown(){faceUp = true;}
+
+  public boolean getFaceUp(){return faceUp;}
+
 }
 
