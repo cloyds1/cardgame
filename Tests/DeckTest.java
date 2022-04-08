@@ -33,8 +33,8 @@ public class DeckTest {
     ArrayList<Card> testDeck = new ArrayList<>();
     ArrayList<Player> testPlayers = new ArrayList<Player>();
 
-    testPlayers.add(new Player());
-    testPlayers.add(new Player());
+    testPlayers.add(new Player("player1"));
+    testPlayers.add(new Player("player2"));
 
     Deck deckTest = new Deck(testDeck);
 
@@ -51,7 +51,7 @@ public class DeckTest {
     testDeck.add(new Card(Rank.NINE, Suit.DIAMONDS));
     testDeck.add(new Card(Rank.THREE, Suit.CLUBS));
 
-    Collections.shuffle(testDeck);
+    //Collections.shuffle(testDeck);
     deckTest.dealCards(testPlayers, testDeck);
 
     assertThat(testPlayers.get(0).getHand().size()).isEqualTo(6);
