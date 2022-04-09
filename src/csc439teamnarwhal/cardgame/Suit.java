@@ -1,7 +1,7 @@
 package csc439teamnarwhal.cardgame;
 
 public enum Suit {
-  CLUBS("Clubs"), SPADES("Spades"), DIAMONDS("Diamonds"), HEARTS("Hearts");
+  CLUBS("C"), SPADES("S"), DIAMONDS("D"), HEARTS("H");
 
   final String suit;
 

@@ -20,7 +20,7 @@ public class Player {
         return name;
     }
 
-    public List<Card> getHand(){
+    public ArrayList<Card> getHand(){
         return hand;
     }
 

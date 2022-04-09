@@ -20,12 +20,16 @@ public class CardGameView {
         input = scanner.next();
     }
 
-    public String getNumPlayers(){
+    public String getInput(){
         return input;
     }
 
     public String getText() {
         return this.text;
+    }
+
+    public void setCardRows(String text){
+        System.out.printf("%-10s", text);
     }
 
 
