@@ -37,18 +37,10 @@ public class CardGameController {
     view.setText("It is " + currentPlayer.getName() + "'s Turn");
     view.setText(currentPlayer.getName() + "'s Hand: ");
     displayHand(players);
-    view.setText("Choose from one of the options below: ");
-    view.setText("1: Draw from the deck");
-    view.setText("2: Pick up the Discard Card");
-    view.setText("3: End the game");
-    view.setInput();
-    while(view.getInput().equals("2") && view.getInput().equals("1")){
+    playerOptions();
+    while(!view.getInput().equals("2") && !view.getInput().equals("1")){
       view.setText("You have entered an invalid choice");
-      view.setText("Choose from one of the options below: ");
-      view.setText("1: Draw from the deck");
-      view.setText("2: Pick up the Discard Card");
-      view.setText("3: End the game");
-      view.setInput();
+      playerOptions();
     }
     //logic for draw or pick up card from Michael
   }
@@ -152,6 +144,13 @@ public class CardGameController {
     view.setText("");
     view.setText("");
 
+  }
+  public void playerOptions(){
+    view.setText("Choose from one of the options below: ");
+    view.setText("1: Draw from the deck");
+    view.setText("2: Pick up the Discard Card");
+    view.setText("3: End the game");
+    view.setInput();
   }
 }
 

@@ -1,6 +1,5 @@
 package csc439teamnarwhal.cardgame;
 
-import org.junit.jupiter.api.Test;
 
 /**
  * CSC 439 - Software Testing and Maintenance
