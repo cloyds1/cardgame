@@ -14,6 +14,13 @@ public class CardGameController {
   int playerTurn = 0;
   ListIterator<Card> deckIterator;
 
+  public Deck getDeck() {
+    return deck;
+  }
+
+  public ArrayList<Player> getPlayers() {
+    return players;
+  }
 
   /**
    * This method creates the gameSetup before the players take their turns. It prompts the user for
@@ -34,17 +41,17 @@ public class CardGameController {
       createDoubleDeck(deck);
     }
     Collections.shuffle(deck.getDeck());
-    createPlayers(numPlayers, players);
+    createPlayers(numPlayers);
     deck.dealCards(players);
     deckIterator = deck.getDeck().listIterator();
     deck.flipTopCard(deckIterator);
-
   }
 
   /**
    * This method drive the play of the game. We start by determining who's turn it is. We then share
    * that players hand to the view along with the discard and offer the player the options of the
-   * game.
+   * game. The player can draw from the discard and switch with their hand, or they can draw from
+   * the deck. If drawing from deck, they must switch with their hand, or they can discard.
    */
   public void playGame() {
 
@@ -52,6 +59,7 @@ public class CardGameController {
     view.setText("It is " + currentPlayer.getName() + "'s Turn");
     view.setText(currentPlayer.getName() + "'s Hand: ");
     displayHand(players);
+    view.setText("The current discard is: ");
     displayDiscard();
 
     playerOptions();
@@ -60,23 +68,46 @@ public class CardGameController {
       view.setText("You have entered an invalid choice");
       playerOptions();
     }
-
+    //draw from deck
     if (view.getInput().equals("1")) {
       Card drawn = deck.drawCard(true, deckIterator);
+      System.out.println(drawn);
       view.setText("The card you drew is: ");
       displayCard(drawn);
+      view.setText(
+          "Which card would you like to switch (Enter 1-6) to switch with your hand, or 0 to discard the drawn card.");
+      view.setInput();
+      int choice = Integer.parseInt(view.getInput());
+     //discard drawn card
+      if(choice == 0){
+        //code to discard drawn
+      }
+      //discard card from hand and swap
+      else {
+        switchCardInHand(choice, drawn, deckIterator, playerTurn);
+        view.setText(currentPlayer.getName() + "'s New Hand: ");
+        displayHand(players);
+      }
+
+    }
+    //switch a card with discard
+    else if (view.getInput().equals("2")) {
+      Card pickedup = deck.drawCard(false, deckIterator);
       view.setText("Which card would you like to switch (Enter 1-6)");
-    } else if (view.getInput().equals("2")) {
-      deck.drawCard(false, deckIterator);
+      view.setInput();
+      int choice = Integer.parseInt(view.getInput());
+      switchCardInHand(choice, pickedup, deckIterator, playerTurn);
+      view.setText(currentPlayer.getName() + "'s New Hand: ");
+      displayHand(players);
     } else
-    //write method here
+    //write method here for ending game
     {
       System.out.println("endgame");
     }
 
   }
 
-  public void createPlayers(int numPlayers, ArrayList<Player> players) {
+  public void createPlayers(int numPlayers) {
     for (int i = 1; i <= numPlayers; i++) {
       players.add(new Player("Player" + i));
     }
@@ -196,6 +227,38 @@ public class CardGameController {
     view.setText("|    " + card.getSuit() + "|");
     view.setText("└─────┘");
     view.setText("");
+  }
+
+  public void switchCardInHand(int i, Card card, ListIterator<Card> iterator, int playerTurn) {
+    Card switchCard = null;
+    switch (i) {
+      case 1:
+        switchCard = players.get(playerTurn).getHand().get(0);
+        break;
+      case 2:
+        switchCard = players.get(playerTurn).getHand().get(1);
+        break;
+      case 3:
+        switchCard = players.get(playerTurn).getHand().get(2);
+        break;
+      case 4:
+        switchCard = players.get(playerTurn).getHand().get(3);
+        break;
+      case 5:
+        switchCard = players.get(playerTurn).getHand().get(4);
+        break;
+      case 6:
+        switchCard = players.get(playerTurn).getHand().get(5);
+        break;
+      default:
+        break;
+    }
+    card.faceUp();
+    iterator.previous();
+    iterator.set(switchCard);
+    players.get(playerTurn).getHand().set(i - 1, card);
+    iterator.next();
+
   }
 
 }

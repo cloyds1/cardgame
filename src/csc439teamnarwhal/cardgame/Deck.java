@@ -68,8 +68,9 @@ public class Deck {
       drawnCard = deck.next();
     } else {
       drawnCard = deck.previous();
+      deck.next();
     }
-    System.out.println(drawnCard);
+
     return drawnCard;
   }
 
