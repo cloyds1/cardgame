@@ -2,6 +2,7 @@ package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.ListIterator;
 
 public class CardGameController {
@@ -55,38 +56,44 @@ public class CardGameController {
    */
   public void playGame() {
 
+    //sets up current player turn. Shows hand and discard to player
     currentPlayer = players.get(playerTurn);
     view.setText("It is " + currentPlayer.getName() + "'s Turn");
     view.setText(currentPlayer.getName() + "'s Hand: ");
     displayHand(players);
     view.setText("The current discard is: ");
-    displayDiscard();
+    displayDiscard(deckIterator);
 
+    //player chooses what to do. Draw from deck, draw from discard, or end game
     playerOptions();
+
+    //check for invalid entry
     while (!view.getInput().equals("2") && !view.getInput().equals("1") && !view.getInput()
         .equals("3")) {
       view.setText("You have entered an invalid choice");
       playerOptions();
     }
+
     //draw from deck
     if (view.getInput().equals("1")) {
       Card drawn = deck.drawCard(true, deckIterator);
-      System.out.println(drawn);
       view.setText("The card you drew is: ");
       displayCard(drawn);
       view.setText(
-          "Which card would you like to switch (Enter 1-6) to switch with your hand, or 0 to discard the drawn card.");
+          "Which card would you like to switch (Enter 1-6) to switch with your hand, or 0 to "
+              + "discard the drawn card.");
       view.setInput();
       int choice = Integer.parseInt(view.getInput());
-     //discard drawn card
-      if(choice == 0){
-        //code to discard drawn
+
+      //discard drawn card without switching player hand
+      if (choice == 0) {
+        deckIterator.previous();
+        deckIterator.set(drawn);
+        deckIterator.next();
       }
       //discard card from hand and swap
       else {
         switchCardInHand(choice, drawn, deckIterator, playerTurn);
-        view.setText(currentPlayer.getName() + "'s New Hand: ");
-        displayHand(players);
       }
 
     }
@@ -97,12 +104,24 @@ public class CardGameController {
       view.setInput();
       int choice = Integer.parseInt(view.getInput());
       switchCardInHand(choice, pickedup, deckIterator, playerTurn);
-      view.setText(currentPlayer.getName() + "'s New Hand: ");
-      displayHand(players);
     } else
     //write method here for ending game
     {
       System.out.println("endgame");
+    }
+
+    //display new hand to player
+    view.setText(currentPlayer.getName() + "'s New Hand: ");
+    displayHand(players);
+    view.setText("The new discard is: ");
+    displayDiscard(deckIterator);
+
+    //increment player turn up to total number of players (size of array).
+    // Once all players have gone, reset to first player (0 for array)
+    if (playerTurn < players.size()) {
+      playerTurn++;
+    } else {
+      playerTurn = 0;
     }
 
   }
@@ -215,9 +234,10 @@ public class CardGameController {
     view.setInput();
   }
 
-  public void displayDiscard() {
+  public Card displayDiscard(ListIterator deckIterator) {
     Card discard = deck.displayDiscard(deckIterator);
     displayCard(discard);
+    return discard;
   }
 
   public void displayCard(Card card) {

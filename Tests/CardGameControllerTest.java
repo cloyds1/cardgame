@@ -55,12 +55,21 @@ public class CardGameControllerTest {
 
   @Test
   void displayDiscard() {
-    //not sure how to test display from this method
+    ListIterator<Card> deckIterator = controller.getDeck().getDeck().listIterator();
+    deckIterator.next();
+    Card discard = deckIterator.previous();
+    deckIterator.next();
+    controller.displayDiscard(deckIterator);
+
+    assertThat(controller.displayDiscard(deckIterator).equals(discard)).isTrue();
+
   }
 
   @Test
   void displayCard() {
-    //not sure how to test display from this method
+    Card card = new Card(Rank.JACK, Suit.CLUBS);
+    controller.displayCard(card);
+    //not sure how to test this further
   }
 
   @Test
@@ -71,10 +80,7 @@ public class CardGameControllerTest {
     controller.getDeck().dealCards(controller.getPlayers());
     ListIterator<Card> deckIterator = controller.getDeck().getDeck().listIterator();;
     controller.getDeck().flipTopCard(deckIterator);
-
     controller.switchCardInHand(1, card, deckIterator, 0);
-
-
     assertThat(controller.getPlayers().get(0).getHand().get(0).equals(card)).isTrue();
 
     }
