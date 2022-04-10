@@ -39,17 +39,21 @@ public class CardGameControllerTest {
 
   @Test
   void displayHand() {
+    //not sure how to test display from this method
   }
 
   @Test
   void playerOptions() {
+    //not sure how to test display from this method
   }
 
   @Test
   void displayDiscard() {
+    //not sure how to test display from this method
   }
 
   @Test
   void displayCard() {
+    //not sure how to test display from this method
   }
 }
