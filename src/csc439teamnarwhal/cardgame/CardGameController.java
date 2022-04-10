@@ -2,6 +2,7 @@ package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.ListIterator;
 
 public class CardGameController {
 
@@ -11,8 +12,14 @@ public class CardGameController {
   int numPlayers = 0;
   Player currentPlayer;
   int playerTurn = 0;
+  ListIterator<Card> deckIterator;
 
 
+  /**
+   * This method creates the gameSetup before the players take their turns. It prompts the user for
+   * the number of players and selects the deck size accordingly. The players are created and their
+   * hands are dealt. The top card is flipped over to create the discard pile.
+   */
   public void gameSetup() {
     view.setText("Welcome to the 6-Card Golf Game, brought to you in part by Team Narwhal inc.");
     view.setText("Please enter the number of players: ");
@@ -24,25 +31,49 @@ public class CardGameController {
       numPlayers = Integer.parseInt(view.getInput());
     }
     if (numPlayers > 4) {
-      createDoubleDeck();
+      createDoubleDeck(deck);
     }
     Collections.shuffle(deck.getDeck());
     createPlayers(numPlayers, players);
     deck.dealCards(players);
+    deckIterator = deck.getDeck().listIterator();
+    deck.flipTopCard(deckIterator);
+
   }
 
+  /**
+   * This method drive the play of the game. We start by determining who's turn it is. We then share
+   * that players hand to the view along with the discard and offer the player the options of the
+   * game.
+   */
   public void playGame() {
 
     currentPlayer = players.get(playerTurn);
     view.setText("It is " + currentPlayer.getName() + "'s Turn");
     view.setText(currentPlayer.getName() + "'s Hand: ");
     displayHand(players);
+    displayDiscard();
+
     playerOptions();
-    while(!view.getInput().equals("2") && !view.getInput().equals("1")){
+    while (!view.getInput().equals("2") && !view.getInput().equals("1") && !view.getInput()
+        .equals("3")) {
       view.setText("You have entered an invalid choice");
       playerOptions();
     }
-    //logic for draw or pick up card from Michael
+
+    if (view.getInput().equals("1")) {
+      Card drawn = deck.drawCard(true, deckIterator);
+      view.setText("The card you drew is: ");
+      displayCard(drawn);
+      view.setText("Which card would you like to switch (Enter 1-6)");
+    } else if (view.getInput().equals("2")) {
+      deck.drawCard(false, deckIterator);
+    } else
+    //write method here
+    {
+      System.out.println("endgame");
+    }
+
   }
 
   public void createPlayers(int numPlayers, ArrayList<Player> players) {
@@ -51,9 +82,8 @@ public class CardGameController {
     }
   }
 
-  public void createDoubleDeck() {
-    Deck deck2 = new Deck();
-    deck.getDeck().addAll(deck2.getDeck());
+  public void createDoubleDeck(Deck deck) {
+    deck.getDeck().addAll(deck.getDeck());
   }
 
   public void displayHand(ArrayList<Player> player) {
@@ -145,13 +175,29 @@ public class CardGameController {
     view.setText("");
 
   }
-  public void playerOptions(){
+
+  public void playerOptions() {
     view.setText("Choose from one of the options below: ");
     view.setText("1: Draw from the deck");
-    view.setText("2: Pick up the Discard Card");
+    view.setText("2: Pick up the Discard");
     view.setText("3: End the game");
     view.setInput();
   }
+
+  public void displayDiscard() {
+    Card discard = deck.displayDiscard(deckIterator);
+    displayCard(discard);
+  }
+
+  public void displayCard(Card card) {
+    view.setText("┌─────┐");
+    view.setText("|" + card.getSuit() + "    |");
+    view.setText("|  " + card.getRank_name() + "  |");
+    view.setText("|    " + card.getSuit() + "|");
+    view.setText("└─────┘");
+    view.setText("");
+  }
+
 }
 
  /* CountModel model = new CountModel(0);

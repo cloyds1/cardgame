@@ -1,7 +1,7 @@
 package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.ListIterator;
 
 public class Player {
 
@@ -22,6 +22,13 @@ public class Player {
 
     public ArrayList<Card> getHand(){
         return hand;
+    }
+
+    public void addCardToHand(ListIterator<Card> deckIterator, Card card, int i){
+        Card discard = hand.get(i);
+        hand.add(i, card);
+        deckIterator.previous();
+        deckIterator.set(discard);
     }
 
     public String toString(){

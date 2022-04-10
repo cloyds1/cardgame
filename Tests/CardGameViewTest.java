@@ -14,4 +14,20 @@ class CardGameViewTest {
         view.setText("Welcome to Java");
         assertThat("Welcome to Java").isEqualTo(view.getText());
     }
+    @Test
+    void setInput(){
+           }
+    @Test
+    void getInput(){
+
+    }
+    @Test
+    void getText() {
+
+    }
+    @Test
+    void setCardRows(String text){
+
+    }
+
 }
