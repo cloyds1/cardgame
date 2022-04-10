@@ -2,7 +2,6 @@ package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.ListIterator;
 
 public class CardGameController {
@@ -14,6 +13,7 @@ public class CardGameController {
   Player currentPlayer;
   int playerTurn = 0;
   ListIterator<Card> deckIterator;
+  boolean keepPlaying = true;
 
   public Deck getDeck() {
     return deck;
@@ -104,11 +104,11 @@ public class CardGameController {
       view.setInput();
       int choice = Integer.parseInt(view.getInput());
       switchCardInHand(choice, pickedup, deckIterator, playerTurn);
-    } else
-    //write method here for ending game
-    {
-      System.out.println("endgame");
+    } else {
+      keepPlaying = false;
+      return;
     }
+
 
     //display new hand to player
     view.setText(currentPlayer.getName() + "'s New Hand: ");
@@ -124,6 +124,10 @@ public class CardGameController {
       playerTurn = 0;
     }
 
+  }
+
+  public boolean gameContinues(){
+    return (keepPlaying);
   }
 
   public void createPlayers(int numPlayers) {
@@ -281,6 +285,9 @@ public class CardGameController {
 
   }
 
+  public void endGame() {
+    view.setText("The game has ended.");
+  }
 }
 
  /* CountModel model = new CountModel(0);

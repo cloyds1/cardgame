@@ -16,7 +16,10 @@ public class Main {
   public static void main(String[] args) {
     CardGameController controller = new CardGameController();
     controller.gameSetup();
-    controller.playGame();
+    while(controller.gameContinues()){
+      controller.playGame();
+    }
+    controller.endGame();
 
   }
 
