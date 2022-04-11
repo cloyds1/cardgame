@@ -1,8 +1,6 @@
 package csc439teamnarwhal.cardgame;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class Deck {
 
@@ -16,11 +14,15 @@ public class Deck {
     }
   }
 
+  public Deck(ArrayList<Card> deck) {
+    deckOfCards = deck;
+  }
+
   public ArrayList<Card> getDeck() {
     return deckOfCards;
   }
 
-  public void dealCards(ArrayList<Player> players, ArrayList<Card> deckShoe){
+  public void dealCards(ArrayList<Player> players) {
     /*
 
         draw 6 from the shoe/deck, add to each player
@@ -29,24 +31,71 @@ public class Deck {
         insert previous card back into list.
      */
 
-    //random object
-    Random rand = new Random();
+    ArrayList<Card> hand = null;
+    for (Player player : players) {
 
-    //slice a portion of cards from the deck for a player
-    ArrayList<Card> hand = (ArrayList<Card>) deckShoe.subList(0, 5);
+      //slice a portion of cards from the deck for a player
+      if (deckOfCards.size() > 6)
+        hand = new ArrayList<>(deckOfCards.subList(0, 6));
+      else
+        hand = new ArrayList<Card>(deckOfCards);
 
-    //select a random card from the hand, set it to faceUp
-    int tempInt = rand.nextInt(0, 5);
-    hand.get(tempInt).faceUp();
-    Card tempCard = hand.remove(tempInt);
+      //remove entire slice from deck
+      for (int i = 0; i < 6; i++) {
+        deckOfCards.remove(0);
+      }
 
-    hand.get(rand.nextInt(0, 4)).faceUp();
-    hand.add(tempInt, tempCard);
+      //random object
+      Random rand = new Random();
+
+      //select a random card from the hand, set it to faceUp
+      int tempInt = rand.nextInt(5);
+      hand.get(tempInt).faceUp();
+      Card tempCard = hand.remove(tempInt);
+
+      //randomly select another, set it to face up, re-add other card
+      hand.get(rand.nextInt(4)).faceUp();
+      hand.add(tempInt, tempCard);
+
+      //give the player the dealt cards
+      player.acceptCards(hand);
+    }
+  }
+
+  public Card drawCard(boolean drawFromDeck, ListIterator<Card> deck) {
+    Card drawnCard;
+    if (drawFromDeck) {
+      drawnCard = deck.next();
+    } else {
+      drawnCard = deck.previous();
+      deck.next();
+    }
+
+    return drawnCard;
+  }
+
+  public void flipTopCard(ListIterator<Card> deck){
+    deck.next();
+  }
+
+  public Card displayDiscard(ListIterator<Card> deck){
+    Card discard = deck.previous();
+    deck.next();
+    return discard;
+  }
 
 
+  public boolean equals(Deck o) {
+    if (o.deckOfCards.size() != deckOfCards.size()){
+      return false;
+    }
 
-
-
+    for (int i = 0; i < o.deckOfCards.size(); i++) {
+      if (!((o.deckOfCards.get(i)).equals(deckOfCards.get(i)))) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }

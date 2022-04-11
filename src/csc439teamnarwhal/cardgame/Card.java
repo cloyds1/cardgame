@@ -102,7 +102,7 @@ public class Card {
 
   public void faceUp(){faceUp = true;}
 
-  public void faceDown(){faceUp = true;}
+  public void faceDown(){faceUp = false;}
 
   public boolean getFaceUp(){return faceUp;}
 
