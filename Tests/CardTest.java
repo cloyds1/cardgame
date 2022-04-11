@@ -28,12 +28,12 @@ public class CardTest {
 
   @Test
   void suitTest() {
-    assertThat(ace.getSuit()).isEqualTo("Clubs");
+    assertThat(ace.getSuit()).isEqualTo("C");
   }
 
   @Test
   void nameTest() {
-    assertThat(ace.getRank_name()).isEqualTo("Ace");
+    assertThat(ace.getRank_name()).isEqualTo("A");
   }
 
   @Test
@@ -68,17 +68,19 @@ public class CardTest {
 
   @Test
   void toStringTest() {
-    assertThat(ace.toString()).isEqualTo("Ace of Clubs");
+    assertThat(ace.toString()).isEqualTo("A of C");
   }
 
   @Test
   void isRedTest() {
+    assertThat(ten.isRed()).isTrue();
     assertThat(ace.isRed()).isFalse();
   }
 
   @Test
   void isBlackTest() {
     assertThat(ace.isBlack()).isTrue();
+    assertThat(ten.isBlack()).isFalse();
   }
 
   @Test
@@ -93,7 +95,19 @@ public class CardTest {
   }
   @Test
   void equalCardsTestFalse(){
-    Card newAce = new Card(Rank.ACE, Suit.CLUBS);
     assertThat(ace.equals(three)).isFalse();
+  }
+
+  @Test
+  void faceUpTest(){
+    ace.faceUp();
+    assertThat(ace.getFaceUp()).isTrue();
+  }
+
+  @Test
+  void faceDownTest(){
+    ace.faceUp();
+    ace.faceDown();
+    assertThat(ace.getFaceUp()).isFalse();
   }
 }

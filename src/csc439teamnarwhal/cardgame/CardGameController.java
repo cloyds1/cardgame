@@ -38,9 +38,12 @@ public class CardGameController {
       view.setInput();
       numPlayers = Integer.parseInt(view.getInput());
     }
+    //use two decks for more than 4 players
     if (numPlayers > 4) {
       createDoubleDeck(deck);
     }
+    //shuffle the deck, create the players and deal them cards. Flip the top card over to create
+    // the discard pile
     Collections.shuffle(deck.getDeck());
     createPlayers(numPlayers);
     deck.dealCards(players);
@@ -109,7 +112,6 @@ public class CardGameController {
       return;
     }
 
-
     //display new hand to player
     view.setText(currentPlayer.getName() + "'s New Hand: ");
     displayHand(players);
@@ -118,7 +120,7 @@ public class CardGameController {
 
     //increment player turn up to total number of players (size of array).
     // Once all players have gone, reset to first player (0 for array)
-    if (playerTurn < players.size()) {
+    if (playerTurn < players.size() - 1) {
       playerTurn++;
     } else {
       playerTurn = 0;
@@ -126,7 +128,7 @@ public class CardGameController {
 
   }
 
-  public boolean gameContinues(){
+  public boolean gameContinues() {
     return (keepPlaying);
   }
 
@@ -289,17 +291,3 @@ public class CardGameController {
     view.setText("The game has ended.");
   }
 }
-
- /* CountModel model = new CountModel(0);
-  CountView view = new CountView();
-  public void askForInput() {
-    view.setText("What color is the sky?");
-    view.getText();
-    model.setCount(model.getCount() + 1);
-  }
-  public void displayCount() {
-    view.setText("The number of times you answered is " + model.getCount());
-  }
-  public boolean canAskAgain() {
-    return model.getCount() < 3;
-}*/

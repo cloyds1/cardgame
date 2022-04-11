@@ -23,10 +23,11 @@ class CardGameViewTest {
     }
     @Test
     void getText() {
-
+        view.setText("Welcome to Java");
+        assertThat("Welcome to Java").isEqualTo(view.getText());
     }
     @Test
-    void setCardRows(String text){
+    void setCardRows(){
 
     }
 
