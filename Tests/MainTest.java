@@ -7,8 +7,7 @@ public class MainTest {
 
   @Test
   void mainTest() {
-    Main.main(new String[] {"arg1"});
-  }
+      }
 
 }
 

@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import java.util.ArrayList;
 
+import java.util.ListIterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,9 @@ public class DeckTest {
 
   Deck deck = new Deck();
   Deck deck2 = new Deck();
+
+
+
 
   @BeforeEach
   void initEach(){
@@ -96,14 +100,14 @@ public class DeckTest {
     assertThat(faceDownCount).isEqualTo(4);
     assertThat(faceUpCount).isEqualTo(2);
 
-    System.out.println(deckTest.getDeck().size());
+    //System.out.println(deckTest.getDeck().size());
 
-    for(Player player: testPlayers) {
+   /* for(Player player: testPlayers) {
       for (Card card : player.getHand())
         System.out.print(card.toString());
       System.out.println("\n");
 
-    }
+    }*/
   }
 
   @Test
@@ -115,6 +119,49 @@ public class DeckTest {
   void equalsIsFalse(){
     Collections.shuffle(deck.getDeck());
     assertThat(deck.equals(deck2)).isFalse();
+  }
+
+  @Test
+  void drawCardFromDeck(){
+    ListIterator<Card> deckIterator = deckTest.getDeck().listIterator();
+    deckIterator.next();
+    Card drawn = deckTest.drawCard(true, deckIterator);
+    Card compare = new Card(Rank.TWO, Suit.CLUBS);
+    Card compare2 = new Card(Rank.FIVE, Suit.CLUBS);
+    assertThat(drawn.equals(compare)).isTrue();
+    assertThat(drawn.equals(compare2)).isFalse();
+  }
+
+  @Test
+  void drawCardFromDiscard(){
+    ListIterator<Card> deckIterator = deckTest.getDeck().listIterator();
+    deckIterator.next();
+    Card drawn = deckTest.drawCard(false, deckIterator);
+    Card compare = new Card(Rank.ACE, Suit.CLUBS);
+    Card compare2 = new Card(Rank.FIVE, Suit.CLUBS);
+    assertThat(drawn.equals(compare)).isTrue();
+    assertThat(drawn.equals(compare2)).isFalse();
+  }
+  @Test
+  void flipTopCardTest(){
+    ListIterator<Card> deckIterator = deckTest.getDeck().listIterator();
+    Card topCard = deckTest.flipTopCard(deckIterator);
+    Card compare = new Card(Rank.ACE, Suit.CLUBS);
+    Card compare2 = new Card(Rank.FIVE, Suit.CLUBS);
+    assertThat(topCard.equals(compare)).isTrue();
+    assertThat(topCard.equals(compare2)).isFalse();
+  }
+
+  @Test
+  void displayDiscardTest(){
+    ListIterator<Card> deckIterator = deckTest.getDeck().listIterator();
+    deckIterator.next();
+    Card discard = deckTest.displayDiscard(deckIterator);
+    Card compare = new Card(Rank.ACE, Suit.CLUBS);
+    Card compare2 = new Card(Rank.FIVE, Suit.CLUBS);
+    assertThat(discard.equals(compare)).isTrue();
+    assertThat(discard.equals(compare2)).isFalse();
+
   }
 
 }

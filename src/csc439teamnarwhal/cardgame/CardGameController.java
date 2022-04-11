@@ -2,7 +2,6 @@ package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.ListIterator;
 
 public class CardGameController {
@@ -14,6 +13,7 @@ public class CardGameController {
   Player currentPlayer;
   int playerTurn = 0;
   ListIterator<Card> deckIterator;
+  boolean keepPlaying = true;
 
   public Deck getDeck() {
     return deck;
@@ -38,9 +38,12 @@ public class CardGameController {
       view.setInput();
       numPlayers = Integer.parseInt(view.getInput());
     }
+    //use two decks for more than 4 players
     if (numPlayers > 4) {
       createDoubleDeck(deck);
     }
+    //shuffle the deck, create the players and deal them cards. Flip the top card over to create
+    // the discard pile
     Collections.shuffle(deck.getDeck());
     createPlayers(numPlayers);
     deck.dealCards(players);
@@ -104,10 +107,9 @@ public class CardGameController {
       view.setInput();
       int choice = Integer.parseInt(view.getInput());
       switchCardInHand(choice, pickedup, deckIterator, playerTurn);
-    } else
-    //write method here for ending game
-    {
-      System.out.println("endgame");
+    } else {
+      keepPlaying = false;
+      return;
     }
 
     //display new hand to player
@@ -118,12 +120,16 @@ public class CardGameController {
 
     //increment player turn up to total number of players (size of array).
     // Once all players have gone, reset to first player (0 for array)
-    if (playerTurn < players.size()) {
+    if (playerTurn < players.size() - 1) {
       playerTurn++;
     } else {
       playerTurn = 0;
     }
 
+  }
+
+  public boolean gameContinues() {
+    return (keepPlaying);
   }
 
   public void createPlayers(int numPlayers) {
@@ -281,18 +287,7 @@ public class CardGameController {
 
   }
 
+  public void endGame() {
+    view.setText("The game has ended.");
+  }
 }
-
- /* CountModel model = new CountModel(0);
-  CountView view = new CountView();
-  public void askForInput() {
-    view.setText("What color is the sky?");
-    view.getText();
-    model.setCount(model.getCount() + 1);
-  }
-  public void displayCount() {
-    view.setText("The number of times you answered is " + model.getCount());
-  }
-  public boolean canAskAgain() {
-    return model.getCount() < 3;
-}*/

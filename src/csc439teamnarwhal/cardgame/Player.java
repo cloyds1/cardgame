@@ -24,12 +24,14 @@ public class Player {
         return hand;
     }
 
-    public void addCardToHand(ListIterator<Card> deckIterator, Card card, int i){
+    //this method is not used at this time.
+
+    /*public void addCardToHand(ListIterator<Card> deckIterator, Card card, int i){
         Card discard = hand.get(i);
         hand.add(i, card);
         deckIterator.previous();
         deckIterator.set(discard);
-    }
+    }*/
 
     public String toString(){
         return name;

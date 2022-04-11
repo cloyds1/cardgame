@@ -74,8 +74,9 @@ public class Deck {
     return drawnCard;
   }
 
-  public void flipTopCard(ListIterator<Card> deck){
-    deck.next();
+  public Card flipTopCard(ListIterator<Card> deck){
+    Card card = deck.next();
+    return card;
   }
 
   public Card displayDiscard(ListIterator<Card> deck){

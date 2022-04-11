@@ -57,7 +57,7 @@ public class Card {
    * @return boolean value true if card is red
    */
   public boolean isRed() {
-    return (suit.equals("Hearts") || suit.equals("Diamonds"));
+    return (suit.equals("H") || suit.equals("D"));
   }
 
   /**
@@ -66,7 +66,7 @@ public class Card {
    * @return boolean value true if card is black
    */
   public boolean isBlack() {
-    return (suit.equals("Clubs") || suit.equals("Spades"));
+    return (suit.equals("C") || suit.equals("S"));
   }
 
   /**

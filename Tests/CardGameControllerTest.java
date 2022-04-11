@@ -78,7 +78,7 @@ public class CardGameControllerTest {
     controller.createPlayers(5);
     Collections.shuffle(controller.getDeck().getDeck());
     controller.getDeck().dealCards(controller.getPlayers());
-    ListIterator<Card> deckIterator = controller.getDeck().getDeck().listIterator();;
+    ListIterator<Card> deckIterator = controller.getDeck().getDeck().listIterator();
     controller.getDeck().flipTopCard(deckIterator);
     controller.switchCardInHand(1, card, deckIterator, 0);
     assertThat(controller.getPlayers().get(0).getHand().get(0).equals(card)).isTrue();
