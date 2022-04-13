@@ -4,16 +4,11 @@
  * player's hand of cards represented as an ArrayList.
  *
  * CSC 439 - Software Testing and Maintenance
- *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
- * @version 1.0
  */
 
 package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 public class Player {
 
@@ -24,7 +19,7 @@ public class Player {
         this.name = name;
     }
 
-    public void acceptCards(ArrayList<Card> hand){
+    public void setHand(ArrayList<Card> hand){
         this.hand = hand;
     }
 
@@ -35,15 +30,6 @@ public class Player {
     public ArrayList<Card> getHand(){
         return hand;
     }
-
-    //this method is not used at this time.
-
-    /*public void addCardToHand(ListIterator<Card> deckIterator, Card card, int i){
-        Card discard = hand.get(i);
-        hand.add(i, card);
-        deckIterator.previous();
-        deckIterator.set(discard);
-    }*/
 
     public String toString(){
         return name;

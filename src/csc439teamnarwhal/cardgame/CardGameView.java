@@ -3,15 +3,13 @@
  * pattern that we have implemented to conduct the gameplay in our
  * 6-Card Golf Game. This class contains simply the methods that show
  * the information that is continuously procured and sent from
- * CardGameController during gameplay. CardGameView class displays
+ * CardGameController during gameplay. CardGameView class is used to display
  * all the information that is needed for the players to see the game
- * as a pictorial representation, turn by turn.
+ * as a pictorial representation, turn by turn. It is also how the user interacts with
+ * the game through input.
  *
  * CSC 439 - Software Testing and Maintenance
  *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
- * @version 1.0
  */
 
 package csc439teamnarwhal.cardgame;
@@ -29,7 +27,7 @@ public class CardGameView {
 
     /**
      * Accepts a String and outputs the contents to the console
-     * @param text
+     * @param text will be displayed to console
      */
     public void setText(String text) {
         System.out.println(text);
@@ -53,7 +51,7 @@ public class CardGameView {
 
     /**
      * Justifies the text to be shown on console in order
-     * to make the console look clean and organized.
+     * to make the card visually appear clean and organized on the console.
      * @param text
      */
     public void setCardRows(String text) {

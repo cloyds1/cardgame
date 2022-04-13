@@ -5,8 +5,6 @@
  *
  * CSC 439 - Software Testing and Maintenance
  *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
  * @version 1.0
  */
 
@@ -19,8 +17,8 @@ public class Deck {
   private ArrayList<Card> deckOfCards = new ArrayList<>();
 
   /**
-   * Create the deck of cards one by one in a nested for-loop, card suit
-   * by card suit.
+   * Create the deck of cards one by one in a nested for-loop, one card suit at a time
+   * in rank order.
    */
   public Deck() {
     for (Suit s : Suit.values()) {
@@ -30,19 +28,20 @@ public class Deck {
     }
   }
 
-  public Deck(ArrayList<Card> deck) {
+  //this method is not currently used
+  /*public Deck(ArrayList<Card> deck) {
     deckOfCards = deck;
-  }
+  }*/
 
   public ArrayList<Card> getDeck() {
     return deckOfCards;
   }
 
   /**
-   * Method that simulates dealing out the cards to the players. The method
+   * Method that deals out the cards to the players. The method
    * deals in slices of 6 at a time per player, in order to deal faster and
    * more efficiently for the system.
-   * @param players
+   * @param players the array list of players for the game
    */
   public void dealCards(ArrayList<Player> players) {
     /*
@@ -53,19 +52,20 @@ public class Deck {
         insert previous card back into list.
      */
 
-    ArrayList<Card> hand = null;
+    ArrayList<Card> hand;
     for (Player player : players) {
 
       //slice a portion of cards from the deck for a player
       if (deckOfCards.size() > 6)
         hand = new ArrayList<>(deckOfCards.subList(0, 6));
       else
-        hand = new ArrayList<Card>(deckOfCards);
+        hand = new ArrayList<>(deckOfCards);
 
       //remove entire slice from deck
       for (int i = 0; i < 6; i++) {
         deckOfCards.remove(0);
       }
+
 
       //random object
       Random rand = new Random();
@@ -80,17 +80,16 @@ public class Deck {
       hand.add(tempInt, tempCard);
 
       //give the player the dealt cards
-      player.acceptCards(hand);
+      player.setHand(hand);
     }
   }
 
   /**
-   * Method that takes a Boolean to check to see if the deck can be
-   * legally drawn from at any given moment in play and an iterator
-   * for traversing the deck of cards.
-   * @param drawFromDeck
-   * @param deck
-   * @return
+   * Method that draws a card from either the deck or the discard pile.
+   *
+   * @param drawFromDeck boolean to draw from deck (true) or from discard (false)
+   * @param deck the iterator to traverse the deck.
+   * @return returns the card that was chosen from the deck or discard pile.
    */
   public Card drawCard(boolean drawFromDeck, ListIterator<Card> deck) {
     Card drawnCard;
@@ -106,18 +105,17 @@ public class Deck {
 
   /**
    * Method that flips the top card over that is next in the deck.
-   * @param deck
-   * @return
+   * @param deck iterator to traverse deck
+   * @return returns the next card in the deck
    */
   public Card flipTopCard(ListIterator<Card> deck){
-    Card card = deck.next();
-    return card;
+    return deck.next();
   }
 
   /**
    * Method that returns the card that is the discard to the user.
-   * @param deck
-   * @return
+   * @param deck iterator to traverse deck
+   * @return returns the card that is in the discard pile
    */
   public Card displayDiscard(ListIterator<Card> deck){
     Card discard = deck.previous();
@@ -126,11 +124,9 @@ public class Deck {
   }
 
   /**
-   * Method to use for testing to see if the deck has been created and
-   * shuffled or not, and it makes sure the deck is normal and unique
-   * as it is supposed to be made up of 52 unique playing Card Objects.
-   * @param o
-   * @return
+   * Method to check if two decks are equal, primarily for testing purposes.
+   * @param o second deck to compare
+   * @return true if equal decks, false if different decks
    */
   public boolean equals(Deck o) {
     if (o.deckOfCards.size() != deckOfCards.size()){

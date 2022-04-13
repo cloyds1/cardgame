@@ -4,10 +4,6 @@
  * a particular Card Object belongs with.
  *
  * CSC 439 - Software Testing and Maintenance
- *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
- * @version 1.0
  */
 
 package csc439teamnarwhal.cardgame;

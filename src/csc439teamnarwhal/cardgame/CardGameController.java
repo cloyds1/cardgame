@@ -1,17 +1,11 @@
 /**
- * CardGameController is the controller aspect of the Model View Controller
- * (MVC) pattern that we have implemented to conduct the gameplay in our
- * 6-Card Golf Game. This class contains all the methods that drive the logic
- * of the game. The information is continuously obtained and sent to
- * CardGameView during gameplay. CardGameView class displays
- * all the information that is needed for the players to see the game
- * as a pictorial representation, turn by turn.
+ * CardGameController is the controller aspect of the Model View Controller (MVC) pattern that we
+ * have implemented to conduct the gameplay in our 6-Card Golf Game. This class contains all the
+ * methods that drive the logic of the game. The information is continuously obtained and sent to
+ * CardGameView during gameplay. CardGameView class displays all the information that is needed for
+ * the players to see the game as a pictorial representation, turn by turn via the console.
  *
  * CSC 439 - Software Testing and Maintenance
- *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
- * @version 1.0
  */
 
 package csc439teamnarwhal.cardgame;
@@ -41,12 +35,12 @@ public class CardGameController {
 
   /**
    * This method creates the gameSetup before the players take their turns. It prompts the user for
-   * the number of players and selects the deck size accordingly. The players are created and their
-   * hands are dealt. The top card is flipped over to create the discard pile.
+   * the number of players, selects the deck size accordingly and shuffles the deck. The players are
+   * created and their hands are dealt. The top card is flipped over to create the discard pile. An
+   * iterator is introduced to navigate the deck.
    */
   public void gameSetup() {
-    view.setText("Welcome to the 6-Card Golf Game, brought to you in part by Team Narwhal inc.");
-    view.setText("Please enter the number of players: ");
+    displayWelcomeToGame();
     view.setInput();
     numPlayers = Integer.parseInt(view.getInput());
     while (numPlayers < 2) {
@@ -67,11 +61,15 @@ public class CardGameController {
     deck.flipTopCard(deckIterator);
   }
 
+
+
   /**
    * This method drives the play of the game. We start by determining who's turn it is. We then share
    * that players hand to the view along with the discard and offer the player the options of the
    * game. The player can draw from the discard and switch with their hand, or they can draw from
-   * the deck. If drawing from deck, they must switch with their hand, or they can discard.
+   * the deck. If drawing from deck, they must switch with their hand, or they can discard.The
+   * player also has the option to end the game on their turn. After the turn is over, we increment
+   * to the next players turn using the PlayerTurn variable.
    */
   public void playGame() {
 
@@ -80,6 +78,7 @@ public class CardGameController {
     view.setText("It is " + currentPlayer.getName() + "'s Turn");
     view.setText(currentPlayer.getName() + "'s Hand: ");
     displayHand(players);
+    displayDeck();
     view.setText("The current discard is: ");
     displayDiscard(deckIterator);
 
@@ -131,6 +130,7 @@ public class CardGameController {
     //display new hand to player
     view.setText(currentPlayer.getName() + "'s New Hand: ");
     displayHand(players);
+    displayDeck();
     view.setText("The new discard is: ");
     displayDiscard(deckIterator);
 
@@ -144,15 +144,52 @@ public class CardGameController {
 
   }
 
+  /**
+   * Method to display welcome screen to player
+   */
+  private void displayWelcomeToGame() {
+
+    view.setText("                                    @@@@@@");
+    view.setText("                                     @@@@  ");
+    view.setText("                                 @@@@@@@@@@@ ");
+    view.setText("                                  @@@ @ @@@@ ");
+    view.setText("                                  (((@@@(( ");
+    view.setText("       #%%%%%%%%%%%%%      ((((((((((((((((((((((");
+    view.setText("          %%%%%%%%%%%%% ((((((((((((((((((((((((((((.");
+    view.setText("            %%%%%%%%%%%%%(((((((((((((((((((((((####(((");
+    view.setText("                   ((((((#((((((((((((((((((((#######((((               %%%%%%%%  ");
+    view.setText("                  (((((((((((((((((((((((((((((#####(((((((            %%%%%%%%%%% %%%%%%%%");
+    view.setText("                 ((((((((((((((((((((((((((((((((#########((           %%%%%%%%%%%%%%%%%%%%%");
+    view.setText("                (((((((((((((((((((((((((((((((((####(((((((((          %%%%%%%%%%%%%%%%%%%%");
+    view.setText("                (((((((((((((((((((((((((((((((((((((((((((((((           %%%%%%%%%%%%%%%%");
+    view.setText("                (((((((((((((((((((((((((((((((((((((((((((((((((          %%%%%%%%%%%%");
+    view.setText("                (((((((((((((@(((((((((((((((((((((((((((((((((((((        (%%%%%%%%  ");
+    view.setText("                 ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((%%%#( ");
+    view.setText("                  (((@(((((((((((((((((((((((((((((((((((((((((((((((((((((((((( ");
+    view.setText("                   (((((((((((((@@@@((@@@(((((((((((((((((((((((((((((((((((((( ");
+    view.setText("                     ,(((((((((@@@@@@@@((((((((((((((((((((((((((((((((((((( ");
+    view.setText("                        *(((((((@@@@@@@@@@.......................((((((((  ");
+    view.setText("                             (((@@@@@@@@@@........................(((  ");
+    view.setText("                                /@@@@@@@((((((((((((((((((((( ");
+    view.setText("");
+    view.setText("Welcome to the 6-Card Golf Game, brought to you in part by Team Narwhal inc.");
+    view.setText("Please enter the number of players: ");
+
+
+
+  }
+
+  /**
+   * @return boolean value to determine if game play should continue or not.
+   */
   public boolean gameContinues() {
     return (keepPlaying);
   }
 
   /**
    * Method that creates a new Player (Object) and adds them
-   * to the ArrayList, one by one, based on the user input
-   * given when asked how many players will be playing the game.
-   * @param numPlayers
+   * to the ArrayList, one by one.
+   * @param numPlayers the number of players as provided by input
    */
   public void createPlayers(int numPlayers) {
     for (int i = 1; i <= numPlayers; i++) {
@@ -165,7 +202,7 @@ public class CardGameController {
    * that there will be greater than 4 players playing the game.
    * It creates an additional deck of 52 cards to be added to the
    * existing deck in order to make it into a double deck.
-   * @param deck
+   * @param deck the deck we will duplicate to make a double deck
    */
   public void createDoubleDeck(Deck deck) {
     deck.getDeck().addAll(deck.getDeck());
@@ -176,7 +213,7 @@ public class CardGameController {
    * for the players to be shown the gameplay displayed on the console, play
    * by play. displayHand() translates the data into a neatly organized and
    * enjoyable format that is easy for the players to see on the console.
-   * @param player
+   * @param player the players hand that we would like to display
    */
   public void displayHand(ArrayList<Player> player) {
     ArrayList<Card> currentHand = player.get(playerTurn).getHand();
@@ -270,7 +307,7 @@ public class CardGameController {
 
   /**
    * Method that uses the View to display the players options during
-   * their turn and is called in playGame() whenever it is necessary.
+   * their turn and is called in playGame() at the start of their turn.
    */
   public void playerOptions() {
     view.setText("Choose from one of the options below: ");
@@ -281,11 +318,10 @@ public class CardGameController {
   }
 
   /**
-   * Method that displays the card on the top of the discard pile
-   * and returns it so that it can be swapped out for one of the cards
-   * in the player's hand that is chosen.
-   * @param deckIterator
-   * @return
+   * Method that displays the card on the top of the discard pile so the player can see if they
+   * would like to swap their card with discard.
+   * @param deckIterator the iterator needed to navigate the deck
+   * @return the discard is returned to aid in testing and possible future need of the discard
    */
   public Card displayDiscard(ListIterator deckIterator) {
     Card discard = deck.displayDiscard(deckIterator);
@@ -296,7 +332,7 @@ public class CardGameController {
   /**
    * Method that simply expresses the current card value in
    * a visual format that is pleasing to the user.
-   * @param card
+   * @param card card you would like to display on console
    */
   public void displayCard(Card card) {
     view.setText("┌─────┐");
@@ -308,12 +344,24 @@ public class CardGameController {
   }
 
   /**
+   * Displays the deck to the user
+   */
+  public void displayDeck(){
+    view.setText("┌─────┐");
+    view.setText("|     |");
+    view.setText("|~DECK|");
+    view.setText("|     |");
+    view.setText("└─────┘");
+    view.setText("");
+  }
+
+  /**
    * Method that has a switch statement that checks for which card in
    * a player's hand of 6 cards will be swapped for another legal card.
-   * @param i
-   * @param card
-   * @param iterator
-   * @param playerTurn
+   * @param i choice of card to swap from player's hand
+   * @param card card to swap with player's hand
+   * @param iterator iterator used to navigate deck
+   * @param playerTurn player who is switching cards in hand
    */
   public void switchCardInHand(int i, Card card, ListIterator<Card> iterator, int playerTurn) {
     Card switchCard = null;
