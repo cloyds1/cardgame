@@ -102,11 +102,11 @@ public class CardGameController {
     }
     //switch a card with discard
     else if (view.getInput().equals("2")) {
-      Card pickedup = deck.drawCard(false, deckIterator);
+      Card pickedUp = deck.drawCard(false, deckIterator);
       view.setText("Which card would you like to switch (Enter 1-6)");
       view.setInput();
       int choice = Integer.parseInt(view.getInput());
-      switchCardInHand(choice, pickedup, deckIterator, playerTurn);
+      switchCardInHand(choice, pickedUp, deckIterator, playerTurn);
     } else {
       keepPlaying = false;
       return;
@@ -258,26 +258,14 @@ public class CardGameController {
   public void switchCardInHand(int i, Card card, ListIterator<Card> iterator, int playerTurn) {
     Card switchCard = null;
     switch (i) {
-      case 1:
-        switchCard = players.get(playerTurn).getHand().get(0);
-        break;
-      case 2:
-        switchCard = players.get(playerTurn).getHand().get(1);
-        break;
-      case 3:
-        switchCard = players.get(playerTurn).getHand().get(2);
-        break;
-      case 4:
-        switchCard = players.get(playerTurn).getHand().get(3);
-        break;
-      case 5:
-        switchCard = players.get(playerTurn).getHand().get(4);
-        break;
-      case 6:
-        switchCard = players.get(playerTurn).getHand().get(5);
-        break;
-      default:
-        break;
+      case 1 -> switchCard = players.get(playerTurn).getHand().get(0);
+      case 2 -> switchCard = players.get(playerTurn).getHand().get(1);
+      case 3 -> switchCard = players.get(playerTurn).getHand().get(2);
+      case 4 -> switchCard = players.get(playerTurn).getHand().get(3);
+      case 5 -> switchCard = players.get(playerTurn).getHand().get(4);
+      case 6 -> switchCard = players.get(playerTurn).getHand().get(5);
+      default -> {
+      }
     }
     card.faceUp();
     iterator.previous();
