@@ -40,8 +40,7 @@ public class CardGameController {
    * iterator is introduced to navigate the deck.
    */
   public void gameSetup() {
-    view.setText("Welcome to the 6-Card Golf Game, brought to you in part by Team Narwhal inc.");
-    view.setText("Please enter the number of players: ");
+    displayWelcomeToGame();
     view.setInput();
     numPlayers = Integer.parseInt(view.getInput());
     while (numPlayers < 2) {
@@ -62,6 +61,8 @@ public class CardGameController {
     deck.flipTopCard(deckIterator);
   }
 
+
+
   /**
    * This method drives the play of the game. We start by determining who's turn it is. We then share
    * that players hand to the view along with the discard and offer the player the options of the
@@ -77,6 +78,7 @@ public class CardGameController {
     view.setText("It is " + currentPlayer.getName() + "'s Turn");
     view.setText(currentPlayer.getName() + "'s Hand: ");
     displayHand(players);
+    displayDeck();
     view.setText("The current discard is: ");
     displayDiscard(deckIterator);
 
@@ -128,6 +130,7 @@ public class CardGameController {
     //display new hand to player
     view.setText(currentPlayer.getName() + "'s New Hand: ");
     displayHand(players);
+    displayDeck();
     view.setText("The new discard is: ");
     displayDiscard(deckIterator);
 
@@ -138,6 +141,41 @@ public class CardGameController {
     } else {
       playerTurn = 0;
     }
+
+  }
+
+  /**
+   * Method to display welcome screen to player
+   */
+  private void displayWelcomeToGame() {
+
+    view.setText("                                    @@@@@@");
+    view.setText("                                     @@@@  ");
+    view.setText("                                 @@@@@@@@@@@ ");
+    view.setText("                                  @@@ @ @@@@ ");
+    view.setText("                                  (((@@@(( ");
+    view.setText("       #%%%%%%%%%%%%%      ((((((((((((((((((((((");
+    view.setText("          %%%%%%%%%%%%% ((((((((((((((((((((((((((((.");
+    view.setText("            %%%%%%%%%%%%%(((((((((((((((((((((((####(((");
+    view.setText("                   ((((((#((((((((((((((((((((#######((((               %%%%%%%%  ");
+    view.setText("                  (((((((((((((((((((((((((((((#####(((((((            %%%%%%%%%%% %%%%%%%%");
+    view.setText("                 ((((((((((((((((((((((((((((((((#########((           %%%%%%%%%%%%%%%%%%%%%");
+    view.setText("                (((((((((((((((((((((((((((((((((####(((((((((          %%%%%%%%%%%%%%%%%%%%");
+    view.setText("                (((((((((((((((((((((((((((((((((((((((((((((((           %%%%%%%%%%%%%%%%");
+    view.setText("                (((((((((((((((((((((((((((((((((((((((((((((((((          %%%%%%%%%%%%");
+    view.setText("                (((((((((((((@(((((((((((((((((((((((((((((((((((((        (%%%%%%%%  ");
+    view.setText("                 ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((%%%#( ");
+    view.setText("                  (((@(((((((((((((((((((((((((((((((((((((((((((((((((((((((((( ");
+    view.setText("                   (((((((((((((@@@@((@@@(((((((((((((((((((((((((((((((((((((( ");
+    view.setText("                     ,(((((((((@@@@@@@@((((((((((((((((((((((((((((((((((((( ");
+    view.setText("                        *(((((((@@@@@@@@@@.......................((((((((  ");
+    view.setText("                             (((@@@@@@@@@@........................(((  ");
+    view.setText("                                /@@@@@@@((((((((((((((((((((( ");
+    view.setText("");
+    view.setText("Welcome to the 6-Card Golf Game, brought to you in part by Team Narwhal inc.");
+    view.setText("Please enter the number of players: ");
+
+
 
   }
 
@@ -301,6 +339,18 @@ public class CardGameController {
     view.setText("|" + card.getSuit() + "    |");
     view.setText("|  " + card.getRank_name() + "  |");
     view.setText("|    " + card.getSuit() + "|");
+    view.setText("└─────┘");
+    view.setText("");
+  }
+
+  /**
+   * Displays the deck to the user
+   */
+  public void displayDeck(){
+    view.setText("┌─────┐");
+    view.setText("|     |");
+    view.setText("|~DECK|");
+    view.setText("|     |");
     view.setText("└─────┘");
     view.setText("");
   }
