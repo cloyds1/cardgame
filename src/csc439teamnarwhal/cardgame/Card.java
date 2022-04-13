@@ -10,12 +10,6 @@ package csc439teamnarwhal.cardgame;
  * value 1 if greater than, 0 if equal, and -1 if less than, and an equals() method that returns
  * a boolean value of true if the cards are considered equal.
  *
- *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
- * @author Michael Koch
- * @author Sean Cloyd
- * @version 1.0
  */
 public class Card {
 
@@ -26,10 +20,10 @@ public class Card {
 
   /**
    * This constructor creates a playing card with a suit and number. It also creates the value of
-   * the card based on 1, 2,...A with values 1-14
+   * the card based on A, 2,...K with values 1-10. All face cards have a value of 10.
    *
    * @param suit   parameter for the suit of the card
-   * @param rank  parameter for the number of the card (1, 2... to A)
+   * @param rank  parameter for the number of the card (A, 2... to K)
    */
   public Card(Rank rank, Suit suit) {
     this.suit = suit.getSuit();
@@ -100,10 +94,19 @@ public class Card {
     return this.suit.equals(c.suit) && this.rank_name.equals(c.rank_name);
   }
 
+  /**
+   * This method turns a card to the faceUp position.
+   */
   public void faceUp(){faceUp = true;}
 
+  /**
+   * This method turns a card to the faceDown position.
+   */
   public void faceDown(){faceUp = false;}
 
+  /**
+   * @return returns true if card is faceup
+   */
   public boolean getFaceUp(){return faceUp;}
 
 }

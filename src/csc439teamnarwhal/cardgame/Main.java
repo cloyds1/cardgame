@@ -3,14 +3,15 @@ package csc439teamnarwhal.cardgame;
 
 /**
  * CSC 439 - Software Testing and Maintenance
+ * Golf Cardgame Project
  *
- * @author Clinton Schultz
- * @author Ellen Hokkanen
- * @version 1.0
+ * @version 2.0
  */
 public class Main {
 
   /**
+   * The main method runs the program by implementing the CardGameController with a
+   * Model-View-Controller pattern
    * @param args parameters for main method
    */
   public static void main(String[] args) {
