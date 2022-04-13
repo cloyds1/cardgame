@@ -1,3 +1,15 @@
+/**
+ * This is the class where the player is created and each is stored
+ * as a Player Object that has a name represented as a string and the
+ * player's hand of cards represented as an ArrayList.
+ *
+ * CSC 439 - Software Testing and Maintenance
+ *
+ * @author Clinton Schultz
+ * @author Ellen Hokkanen
+ * @version 1.0
+ */
+
 package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;

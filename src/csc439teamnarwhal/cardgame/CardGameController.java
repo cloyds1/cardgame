@@ -1,3 +1,19 @@
+/**
+ * CardGameController is the controller aspect of the Model View Controller
+ * (MVC) pattern that we have implemented to conduct the gameplay in our
+ * 6-Card Golf Game. This class contains all the methods that drive the logic
+ * of the game. The information is continuously obtained and sent to
+ * CardGameView during gameplay. CardGameView class displays
+ * all the information that is needed for the players to see the game
+ * as a pictorial representation, turn by turn.
+ *
+ * CSC 439 - Software Testing and Maintenance
+ *
+ * @author Clinton Schultz
+ * @author Ellen Hokkanen
+ * @version 1.0
+ */
+
 package csc439teamnarwhal.cardgame;
 
 import java.util.ArrayList;
@@ -52,7 +68,7 @@ public class CardGameController {
   }
 
   /**
-   * This method drive the play of the game. We start by determining who's turn it is. We then share
+   * This method drives the play of the game. We start by determining who's turn it is. We then share
    * that players hand to the view along with the discard and offer the player the options of the
    * game. The player can draw from the discard and switch with their hand, or they can draw from
    * the deck. If drawing from deck, they must switch with their hand, or they can discard.
@@ -132,16 +148,36 @@ public class CardGameController {
     return (keepPlaying);
   }
 
+  /**
+   * Method that creates a new Player (Object) and adds them
+   * to the ArrayList, one by one, based on the user input
+   * given when asked how many players will be playing the game.
+   * @param numPlayers
+   */
   public void createPlayers(int numPlayers) {
     for (int i = 1; i <= numPlayers; i++) {
       players.add(new Player("Player" + i));
     }
   }
 
+  /**
+   * createDoubleDeck is called in gameSetup() when the user input indicates
+   * that there will be greater than 4 players playing the game.
+   * It creates an additional deck of 52 cards to be added to the
+   * existing deck in order to make it into a double deck.
+   * @param deck
+   */
   public void createDoubleDeck(Deck deck) {
     deck.getDeck().addAll(deck.getDeck());
   }
 
+  /**
+   * Method that creates the data that will be used by the View in order
+   * for the players to be shown the gameplay displayed on the console, play
+   * by play. displayHand() translates the data into a neatly organized and
+   * enjoyable format that is easy for the players to see on the console.
+   * @param player
+   */
   public void displayHand(ArrayList<Player> player) {
     ArrayList<Card> currentHand = player.get(playerTurn).getHand();
 
@@ -232,6 +268,10 @@ public class CardGameController {
 
   }
 
+  /**
+   * Method that uses the View to display the players options during
+   * their turn and is called in playGame() whenever it is necessary.
+   */
   public void playerOptions() {
     view.setText("Choose from one of the options below: ");
     view.setText("1: Draw from the deck");
@@ -240,12 +280,24 @@ public class CardGameController {
     view.setInput();
   }
 
+  /**
+   * Method that displays the card on the top of the discard pile
+   * and returns it so that it can be swapped out for one of the cards
+   * in the player's hand that is chosen.
+   * @param deckIterator
+   * @return
+   */
   public Card displayDiscard(ListIterator deckIterator) {
     Card discard = deck.displayDiscard(deckIterator);
     displayCard(discard);
     return discard;
   }
 
+  /**
+   * Method that simply expresses the current card value in
+   * a visual format that is pleasing to the user.
+   * @param card
+   */
   public void displayCard(Card card) {
     view.setText("┌─────┐");
     view.setText("|" + card.getSuit() + "    |");
@@ -255,6 +307,14 @@ public class CardGameController {
     view.setText("");
   }
 
+  /**
+   * Method that has a switch statement that checks for which card in
+   * a player's hand of 6 cards will be swapped for another legal card.
+   * @param i
+   * @param card
+   * @param iterator
+   * @param playerTurn
+   */
   public void switchCardInHand(int i, Card card, ListIterator<Card> iterator, int playerTurn) {
     Card switchCard = null;
     switch (i) {
@@ -275,6 +335,10 @@ public class CardGameController {
 
   }
 
+  /**
+   * Simple method that displays that the game has ended on the
+   * console in text format for the user to see.
+   */
   public void endGame() {
     view.setText("The game has ended.");
   }
