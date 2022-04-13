@@ -1,5 +1,6 @@
 package csc439teamnarwhal.cardgame;
 
+
 /**
  * CSC 439 - Software Testing and Maintenance
  *
@@ -13,7 +14,13 @@ public class Main {
    * @param args parameters for main method
    */
   public static void main(String[] args) {
-    //main method items go here
+    CardGameController controller = new CardGameController();
+    controller.gameSetup();
+    while(controller.gameContinues()){
+      controller.playGame();
+    }
+    controller.endGame();
+
   }
 
 }
