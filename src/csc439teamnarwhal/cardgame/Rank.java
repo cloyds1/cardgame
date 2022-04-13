@@ -1,3 +1,15 @@
+/**
+ * Rank is an enum that stores an integer for the value of the Card
+ * and a String for the name on the card, represented as a single
+ * alphanumeric character.
+ *
+ * CSC 439 - Software Testing and Maintenance
+ *
+ * @author Clinton Schultz
+ * @author Ellen Hokkanen
+ * @version 1.0
+ */
+
 package csc439teamnarwhal.cardgame;
 
 public enum Rank {
