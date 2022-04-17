@@ -42,21 +42,19 @@ public class Player {
 
     public int scoreHand(){
         int handScore = 0;
-        if(hand.get(0) == hand.get(3)){
-            //no score
+        if(hand.get(0).getRank_value() != hand.get(3).getRank_value()){
+            handScore += hand.get(0).getRank_value() + hand.get(3).getRank_value();
         }
-        else handScore += hand.get(0).getRank_value() + hand.get(3).getRank_value();
 
-        if(hand.get(1) == hand.get(4)){
-            //no score
+        if(hand.get(1).getRank_value() != hand.get(4).getRank_value()){
+            handScore += hand.get(1).getRank_value() + hand.get(4).getRank_value();
         }
-        else handScore += hand.get(1).getRank_value() + hand.get(4).getRank_value();
 
-        if(hand.get(2) == hand.get(5)){
-            //no score
+        if(hand.get(2).getRank_value() != hand.get(5).getRank_value()){
+            handScore += hand.get(2).getRank_value() + hand.get(5).getRank_value();
         }
-        else handScore += hand.get(2).getRank_value() + hand.get(5).getRank_value();
 
+        score += handScore;
         return handScore;
     }
 }
