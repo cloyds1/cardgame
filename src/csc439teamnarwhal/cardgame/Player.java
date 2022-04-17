@@ -14,9 +14,11 @@ public class Player {
 
     private ArrayList<Card> hand;
     private String name;
+    private int score;
     public Player(String name){
         hand = null;
         this.name = name;
+        score = 0;
     }
 
     public void setHand(ArrayList<Card> hand){
@@ -27,11 +29,34 @@ public class Player {
         return name;
     }
 
+    public int getScore(){ return score;}
+
     public ArrayList<Card> getHand(){
         return hand;
     }
 
     public String toString(){
         return name;
+    }
+
+
+    public int scoreHand(){
+        int handScore = 0;
+        if(hand.get(0) == hand.get(3)){
+            //no score
+        }
+        else handScore += hand.get(0).getRank_value() + hand.get(3).getRank_value();
+
+        if(hand.get(1) == hand.get(4)){
+            //no score
+        }
+        else handScore += hand.get(1).getRank_value() + hand.get(4).getRank_value();
+
+        if(hand.get(2) == hand.get(5)){
+            //no score
+        }
+        else handScore += hand.get(2).getRank_value() + hand.get(5).getRank_value();
+
+        return handScore;
     }
 }
