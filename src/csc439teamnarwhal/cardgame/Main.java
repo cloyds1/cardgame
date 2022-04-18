@@ -9,23 +9,21 @@ package csc439teamnarwhal.cardgame;
  */
 public class Main {
 
-  /**
-   * The main method runs the program by implementing the CardGameController with a
-   * Model-View-Controller pattern
-   * @param args parameters for main method
-   */
-  public static void main(String[] args) {
-    CardGameController controller = new CardGameController();
-    controller.gameSetup();
-    while(controller.gameContinues()) {
-      while (controller.holeContinues()) {
-        controller.playGame();
-      }
-      //add this when we have the number of holes set.
-      //controller.setContinueHole(true);
+    /**
+     * The main method runs the program by implementing the CardGameController with a
+     * Model-View-Controller pattern
+     *
+     * @param args parameters for main method
+     */
+    public static void main(String[] args) {
+        CardGameController controller = new CardGameController();
+        controller.gameSetup();
+        while (controller.gameContinues() && controller.getHolesLeft() > 0) {
+            controller.setContinueHole(true);
+            while (controller.holeContinues()) {
+                controller.playGame();
+            }
+        }
+        controller.endGame();
     }
-    controller.endGame();
-
-  }
-
 }

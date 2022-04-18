@@ -82,6 +82,40 @@ public class CardGameControllerTest {
     controller.getDeck().flipTopCard(deckIterator);
     controller.switchCardInHand(1, card, deckIterator, 0);
     assertThat(controller.getPlayers().get(0).getHand().get(0).equals(card)).isTrue();
-
+    controller.switchCardInHand(2, card, deckIterator, 0);
+    assertThat(controller.getPlayers().get(0).getHand().get(1).equals(card)).isTrue();
+    controller.switchCardInHand(3, card, deckIterator, 0);
+    assertThat(controller.getPlayers().get(0).getHand().get(2).equals(card)).isTrue();
+    controller.switchCardInHand(4, card, deckIterator, 0);
+    assertThat(controller.getPlayers().get(0).getHand().get(3).equals(card)).isTrue();
+    controller.switchCardInHand(5, card, deckIterator, 0);
+    assertThat(controller.getPlayers().get(0).getHand().get(4).equals(card)).isTrue();
+    controller.switchCardInHand(6, card, deckIterator, 0);
+    assertThat(controller.getPlayers().get(0).getHand().get(5).equals(card)).isTrue();
     }
+
+  @Test
+  void gameContinues() {
+  }
+
+  @Test
+  void createAndDealDeckTest(){
+    controller.setNumPlayers(4);
+    controller.createPlayers(4);
+    controller.createAndDealDeck();
+    assertThat(controller.getDeck().getDeck().size()).isEqualTo(28);
+
+    controller.setDeck(deck1);
+    controller.createAndDealDeck();
+    assertThat(controller.getDeck().getDeck().size()).isEqualTo(28);
+
+  }
+
+  @Test
+  void createAndDealDeckDoubleTest() {
+    controller.setNumPlayers(5);
+    controller.createPlayers(5);
+    controller.createAndDealDeck();
+    assertThat(controller.getDeck().getDeck().size()).isEqualTo(74);
+  }
 }
