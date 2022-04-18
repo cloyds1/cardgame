@@ -17,7 +17,7 @@ public class Main {
   public static void main(String[] args) {
     CardGameController controller = new CardGameController();
     controller.gameSetup();
-    while(controller.gameContinues()){
+    while(controller.gameContinues() && controller.numRounds != 0){
       controller.playGame();
     }
     controller.endGame();
