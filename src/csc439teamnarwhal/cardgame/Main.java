@@ -17,8 +17,11 @@ public class Main {
   public static void main(String[] args) {
     CardGameController controller = new CardGameController();
     controller.gameSetup();
-    while(controller.gameContinues()){
-      controller.playGame();
+    while(controller.gameContinues()) {
+      while (controller.holeContinues()) {
+        controller.playGame();
+      }
+      //controller.setContinueHole(true);
     }
     controller.endGame();
 

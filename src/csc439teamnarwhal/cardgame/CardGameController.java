@@ -24,9 +24,14 @@ public class CardGameController {
   int playerTurn = 0;
   ListIterator<Card> deckIterator;
   boolean keepPlaying = true;
+  boolean continueHole = true;
 
   public Deck getDeck() {
     return deck;
+  }
+
+  public void setContinueHole(boolean continueHole){
+    this.continueHole = continueHole;
   }
 
   public ArrayList<Player> getPlayers() {
@@ -142,8 +147,10 @@ public class CardGameController {
       playerTurn = 0;
     }
 
+    currentPlayer.scoreHand();
+
     if(currentPlayer.allCardsUp()){
-      keepPlaying = false;
+      continueHole = false;
       return;
     }
 
@@ -190,6 +197,8 @@ public class CardGameController {
   public boolean gameContinues() {
     return (keepPlaying);
   }
+
+  public boolean holeContinues(){return continueHole;}
 
   /**
    * Method that creates a new Player (Object) and adds them
