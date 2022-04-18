@@ -18,10 +18,13 @@ public class Main {
     public static void main(String[] args) {
         CardGameController controller = new CardGameController();
         controller.gameSetup();
-        while (controller.gameContinues()) {
+        while (controller.gameContinues() && controller.getHolesLeft() > 0) {
+            controller.setContinueHole(true);
             while (controller.holeContinues()) {
                 controller.playGame();
             }
+
         }
+        controller.endGame();
     }
 }

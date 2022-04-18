@@ -138,7 +138,7 @@ public class CardGameController {
             switchCardInHand(choice, pickedUp, deckIterator, playerTurn);
         } else {
             keepPlaying = false;
-            endGame();
+            continueHole = false;
             return;
         }
 
@@ -171,12 +171,10 @@ public class CardGameController {
                 return;
             }
             deck = new Deck();
-            ListIterator<Card> deckIterator;
             Collections.shuffle(deck.getDeck());
             deck.dealCards(players);
             deckIterator = deck.getDeck().listIterator();
             deck.flipTopCard(deckIterator);
-            playGame();
         }
     }
 
