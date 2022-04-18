@@ -57,4 +57,13 @@ public class Player {
         score += handScore;
         return handScore;
     }
+
+    public boolean allCardsUp(){
+        for(int i =0; i < 6; i++){
+            if (!(hand.get(i).getFaceUp())){
+                return false;
+            }
+        }
+        return true;
+    }
 }

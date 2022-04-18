@@ -142,6 +142,11 @@ public class CardGameController {
       playerTurn = 0;
     }
 
+    if(currentPlayer.allCardsUp()){
+      keepPlaying = false;
+      return;
+    }
+
   }
 
   /**
