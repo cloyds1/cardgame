@@ -435,6 +435,7 @@ public class CardGameController {
   }
 
   public ArrayList<String> displayScoreboard() {
+    //add current hole and total # holes to this method. Need new final variable for #holes.
     ArrayList<Integer> scores = new ArrayList<>();
     ArrayList<String> namesInOrder = new ArrayList<>();
     for (int i = 0; i < players.size(); i++) {
