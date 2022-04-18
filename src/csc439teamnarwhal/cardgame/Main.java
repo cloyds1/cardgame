@@ -21,6 +21,7 @@ public class Main {
       while (controller.holeContinues()) {
         controller.playGame();
       }
+      //add this when we have the number of holes set.
       //controller.setContinueHole(true);
     }
     controller.endGame();
