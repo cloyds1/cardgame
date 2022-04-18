@@ -4,7 +4,7 @@
  * methods that drive the logic of the game. The information is continuously obtained and sent to
  * CardGameView during gameplay. CardGameView class displays all the information that is needed for
  * the players to see the game as a pictorial representation, turn by turn via the console.
- *
+ * <p>
  * CSC 439 - Software Testing and Maintenance
  */
 
@@ -30,7 +30,7 @@ public class CardGameController {
     return deck;
   }
 
-  public void setContinueHole(boolean continueHole){
+  public void setContinueHole(boolean continueHole) {
     this.continueHole = continueHole;
   }
 
@@ -67,12 +67,11 @@ public class CardGameController {
   }
 
 
-
   /**
-   * This method drives the play of the game. We start by determining who's turn it is. We then share
-   * that players hand to the view along with the discard and offer the player the options of the
-   * game. The player can draw from the discard and switch with their hand, or they can draw from
-   * the deck. If drawing from deck, they must switch with their hand, or they can discard.The
+   * This method drives the play of the game. We start by determining who's turn it is. We then
+   * share that players hand to the view along with the discard and offer the player the options of
+   * the game. The player can draw from the discard and switch with their hand, or they can draw
+   * from the deck. If drawing from deck, they must switch with their hand, or they can discard.The
    * player also has the option to end the game on their turn. After the turn is over, we increment
    * to the next players turn using the PlayerTurn variable.
    */
@@ -89,12 +88,21 @@ public class CardGameController {
 
     //player chooses what to do. Draw from deck, draw from discard, or end game
     playerOptions();
-
-    //check for invalid entry
-    while (!view.getInput().equals("2") && !view.getInput().equals("1") && !view.getInput()
-        .equals("3")) {
+    while (!view.getInput().equals("1") && !view.getInput().equals("2") && !view.getInput()
+        .equals("3") && !view.getInput().equals("4")) {
       view.setText("You have entered an invalid choice");
       playerOptions();
+    }
+
+    while (view.getInput().equals("3")) {
+      displayScoreboard();
+      playerOptions();
+      //check for invalid entry
+      while (!view.getInput().equals("1") && !view.getInput().equals("2") && !view.getInput()
+          .equals("3") && !view.getInput().equals("4")){
+        view.setText("You have entered an invalid choice");
+        playerOptions();
+      }
     }
 
     //draw from deck
@@ -127,6 +135,8 @@ public class CardGameController {
       view.setInput();
       int choice = Integer.parseInt(view.getInput());
       switchCardInHand(choice, pickedUp, deckIterator, playerTurn);
+    } else if (view.getInput().equals("3")) {
+      displayScoreboard();
     } else {
       keepPlaying = false;
       return;
@@ -147,13 +157,15 @@ public class CardGameController {
       playerTurn = 0;
     }
 
-    if(currentPlayer.allCardsUp()){
-      for(int i = 0; i < players.size(); i++) {
+    if (currentPlayer.allCardsUp()) {
+      for (int i = 0; i < players.size(); i++) {
         players.get(i).scoreHand();
       }
+      displayScoreboard();
       continueHole = false;
       return;
     }
+
 
   }
 
@@ -170,16 +182,26 @@ public class CardGameController {
     view.setText("       #%%%%%%%%%%%%%      ((((((((((((((((((((((");
     view.setText("          %%%%%%%%%%%%% ((((((((((((((((((((((((((((.");
     view.setText("            %%%%%%%%%%%%%(((((((((((((((((((((((####(((");
-    view.setText("                   ((((((#((((((((((((((((((((#######((((               %%%%%%%%  ");
-    view.setText("                  (((((((((((((((((((((((((((((#####(((((((            %%%%%%%%%%% %%%%%%%%");
-    view.setText("                 ((((((((((((((((((((((((((((((((#########((           %%%%%%%%%%%%%%%%%%%%%");
-    view.setText("                (((((((((((((((((((((((((((((((((####(((((((((          %%%%%%%%%%%%%%%%%%%%");
-    view.setText("                (((((((((((((((((((((((((((((((((((((((((((((((           %%%%%%%%%%%%%%%%");
-    view.setText("                (((((((((((((((((((((((((((((((((((((((((((((((((          %%%%%%%%%%%%");
-    view.setText("                (((((((((((((@(((((((((((((((((((((((((((((((((((((        (%%%%%%%%  ");
-    view.setText("                 ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((%%%#( ");
-    view.setText("                  (((@(((((((((((((((((((((((((((((((((((((((((((((((((((((((((( ");
-    view.setText("                   (((((((((((((@@@@((@@@(((((((((((((((((((((((((((((((((((((( ");
+    view.setText(
+        "                   ((((((#((((((((((((((((((((#######((((               %%%%%%%%  ");
+    view.setText(
+        "                  (((((((((((((((((((((((((((((#####(((((((            %%%%%%%%%%% %%%%%%%%");
+    view.setText(
+        "                 ((((((((((((((((((((((((((((((((#########((           %%%%%%%%%%%%%%%%%%%%%");
+    view.setText(
+        "                (((((((((((((((((((((((((((((((((####(((((((((          %%%%%%%%%%%%%%%%%%%%");
+    view.setText(
+        "                (((((((((((((((((((((((((((((((((((((((((((((((           %%%%%%%%%%%%%%%%");
+    view.setText(
+        "                (((((((((((((((((((((((((((((((((((((((((((((((((          %%%%%%%%%%%%");
+    view.setText(
+        "                (((((((((((((@(((((((((((((((((((((((((((((((((((((        (%%%%%%%%  ");
+    view.setText(
+        "                 ((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((%%%#( ");
+    view.setText(
+        "                  (((@(((((((((((((((((((((((((((((((((((((((((((((((((((((((((( ");
+    view.setText(
+        "                   (((((((((((((@@@@((@@@(((((((((((((((((((((((((((((((((((((( ");
     view.setText("                     ,(((((((((@@@@@@@@((((((((((((((((((((((((((((((((((((( ");
     view.setText("                        *(((((((@@@@@@@@@@.......................((((((((  ");
     view.setText("                             (((@@@@@@@@@@........................(((  ");
@@ -187,7 +209,6 @@ public class CardGameController {
     view.setText("");
     view.setText("Welcome to the 6-Card Golf Game, brought to you in part by Team Narwhal inc.");
     view.setText("Please enter the number of players: ");
-
 
 
   }
@@ -199,11 +220,13 @@ public class CardGameController {
     return (keepPlaying);
   }
 
-  public boolean holeContinues(){return continueHole;}
+  public boolean holeContinues() {
+    return continueHole;
+  }
 
   /**
-   * Method that creates a new Player (Object) and adds them
-   * to the ArrayList, one by one.
+   * Method that creates a new Player (Object) and adds them to the ArrayList, one by one.
+   *
    * @param numPlayers the number of players as provided by input
    */
   public void createPlayers(int numPlayers) {
@@ -213,10 +236,10 @@ public class CardGameController {
   }
 
   /**
-   * createDoubleDeck is called in gameSetup() when the user input indicates
-   * that there will be greater than 4 players playing the game.
-   * It creates an additional deck of 52 cards to be added to the
-   * existing deck in order to make it into a double-deck.
+   * createDoubleDeck is called in gameSetup() when the user input indicates that there will be
+   * greater than 4 players playing the game. It creates an additional deck of 52 cards to be added
+   * to the existing deck in order to make it into a double-deck.
+   *
    * @param deck the deck we will duplicate to make a double-deck
    */
   public void createDoubleDeck(Deck deck) {
@@ -224,10 +247,10 @@ public class CardGameController {
   }
 
   /**
-   * Method that creates the data that will be used by the View in order
-   * for the players to be shown the gameplay displayed on the console, play
-   * by play. displayHand() translates the data into a neatly organized and
-   * enjoyable format that is easy for the players to see on the console.
+   * Method that creates the data that will be used by the View in order for the players to be shown
+   * the gameplay displayed on the console, play by play. displayHand() translates the data into a
+   * neatly organized and enjoyable format that is easy for the players to see on the console.
+   *
    * @param player the players hand that we would like to display
    */
   public void displayHand(ArrayList<Player> player) {
@@ -321,20 +344,22 @@ public class CardGameController {
   }
 
   /**
-   * Method that uses the View to display the players options during
-   * their turn and is called in playGame() at the start of their turn.
+   * Method that uses the View to display the players options during their turn and is called in
+   * playGame() at the start of their turn.
    */
   public void playerOptions() {
     view.setText("Choose from one of the options below: ");
     view.setText("1: Draw from the deck");
     view.setText("2: Pick up the Discard");
-    view.setText("3: End the game");
+    view.setText("3: Display Scoreboard");
+    view.setText("4: End the game");
     view.setInput();
   }
 
   /**
    * Method that displays the card on the top of the discard pile so the player can see if they
    * would like to swap their card with discard.
+   *
    * @param deckIterator the iterator needed to navigate the deck
    * @return the discard is returned to aid in testing and possible future need of the discard
    */
@@ -345,8 +370,9 @@ public class CardGameController {
   }
 
   /**
-   * Method that simply expresses the current card value in
-   * a visual format that is pleasing to the user.
+   * Method that simply expresses the current card value in a visual format that is pleasing to the
+   * user.
+   *
    * @param card card you would like to display on console
    */
   public void displayCard(Card card) {
@@ -361,7 +387,7 @@ public class CardGameController {
   /**
    * Displays the deck to the user
    */
-  public void displayDeck(){
+  public void displayDeck() {
     view.setText("┌─────┐");
     view.setText("|     |");
     view.setText("|~DECK|");
@@ -371,11 +397,12 @@ public class CardGameController {
   }
 
   /**
-   * Method that has a switch statement that checks for which card in
-   * a player's hand of 6 cards will be swapped for another legal card.
-   * @param i choice of card to swap from player's hand
-   * @param card card to swap with player's hand
-   * @param iterator iterator used to navigate deck
+   * Method that has a switch statement that checks for which card in a player's hand of 6 cards
+   * will be swapped for another legal card.
+   *
+   * @param i          choice of card to swap from player's hand
+   * @param card       card to swap with player's hand
+   * @param iterator   iterator used to navigate deck
    * @param playerTurn player who is switching cards in hand
    */
   public void switchCardInHand(int i, Card card, ListIterator<Card> iterator, int playerTurn) {
@@ -400,10 +427,38 @@ public class CardGameController {
 
 
   /**
-   * Simple method that displays that the game has ended on the
-   * console in text format for the user to see.
+   * Simple method that displays that the game has ended on the console in text format for the user
+   * to see.
    */
   public void endGame() {
     view.setText("The game has ended.");
+  }
+
+  public void displayScoreboard() {
+    ArrayList<Integer> scores = new ArrayList<>();
+    ArrayList<String> namesInOrder = new ArrayList<>();
+    for (int i = 0; i < players.size(); i++) {
+      scores.add(players.get(i).getScore());
+    }
+    Collections.sort(scores);
+    for (int i = 0; i < scores.size(); i++) {
+      for (int j = 0; j < players.size(); j++) {
+        if (scores.get(i) == players.get(j).getScore()) {
+          namesInOrder.add(players.get(j).getName());
+        }
+      }
+    }
+    view.setText("Scoreboard:");
+    view.setText("-------------------------------");
+    view.setText("");
+    view.setText("     Player       Score");
+    view.setText("");
+    for (int i = 0; i < scores.size(); i++) {
+      int position = i + 1;
+      view.setText(position + ".   " + namesInOrder.get(i) + "      " + scores.get(i));
+    }
+    view.setText(" ");
+    view.setText("-------------------------------");
+
   }
 }
