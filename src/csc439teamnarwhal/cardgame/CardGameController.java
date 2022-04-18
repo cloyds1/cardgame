@@ -147,9 +147,10 @@ public class CardGameController {
       playerTurn = 0;
     }
 
-    currentPlayer.scoreHand();
-
     if(currentPlayer.allCardsUp()){
+      for(int i = 0; i < players.size(); i++) {
+        players.get(i).scoreHand();
+      }
       continueHole = false;
       return;
     }
@@ -215,8 +216,8 @@ public class CardGameController {
    * createDoubleDeck is called in gameSetup() when the user input indicates
    * that there will be greater than 4 players playing the game.
    * It creates an additional deck of 52 cards to be added to the
-   * existing deck in order to make it into a double deck.
-   * @param deck the deck we will duplicate to make a double deck
+   * existing deck in order to make it into a double-deck.
+   * @param deck the deck we will duplicate to make a double-deck
    */
   public void createDoubleDeck(Deck deck) {
     deck.getDeck().addAll(deck.getDeck());
@@ -337,7 +338,7 @@ public class CardGameController {
    * @param deckIterator the iterator needed to navigate the deck
    * @return the discard is returned to aid in testing and possible future need of the discard
    */
-  public Card displayDiscard(ListIterator deckIterator) {
+  public Card displayDiscard(ListIterator<Card> deckIterator) {
     Card discard = deck.displayDiscard(deckIterator);
     displayCard(discard);
     return discard;
