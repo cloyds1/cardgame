@@ -17,8 +17,12 @@ public class Main {
   public static void main(String[] args) {
     CardGameController controller = new CardGameController();
     controller.gameSetup();
-    while(controller.gameContinues() && controller.numRounds != 0){
-      controller.playGame();
+    while(controller.gameContinues()) {
+      while (controller.holeContinues()) {
+        controller.playGame();
+      }
+      //add this when we have the number of holes set.
+      //controller.setContinueHole(true);
     }
     controller.endGame();
 
