@@ -99,7 +99,7 @@ public class CardGameController {
       playerOptions();
       //check for invalid entry
       while (!view.getInput().equals("1") && !view.getInput().equals("2") && !view.getInput()
-          .equals("3") && !view.getInput().equals("4")){
+          .equals("3") && !view.getInput().equals("4")) {
         view.setText("You have entered an invalid choice");
         playerOptions();
       }
@@ -434,7 +434,7 @@ public class CardGameController {
     view.setText("The game has ended.");
   }
 
-  public void displayScoreboard() {
+  public ArrayList<String> displayScoreboard() {
     ArrayList<Integer> scores = new ArrayList<>();
     ArrayList<String> namesInOrder = new ArrayList<>();
     for (int i = 0; i < players.size(); i++) {
@@ -459,6 +459,6 @@ public class CardGameController {
     }
     view.setText(" ");
     view.setText("-------------------------------");
-
+    return namesInOrder;
   }
 }

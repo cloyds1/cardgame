@@ -13,7 +13,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class CardGameControllerTest {
   CardGameController controller = new CardGameController();
-  ArrayList<Player> players = new ArrayList<>();
   Deck deck1 = new Deck();
   Deck deck2 = new Deck();
 
@@ -82,6 +81,24 @@ public class CardGameControllerTest {
     controller.getDeck().flipTopCard(deckIterator);
     controller.switchCardInHand(1, card, deckIterator, 0);
     assertThat(controller.getPlayers().get(0).getHand().get(0).equals(card)).isTrue();
+
+    }
+
+    @Test
+  void displayScoreboardTest(){
+      controller.createPlayers(5);
+      controller.getPlayers().get(0).setScore(12);
+      controller.getPlayers().get(1).setScore(2);
+      controller.getPlayers().get(2).setScore(48);
+      controller.getPlayers().get(3).setScore(17);
+      controller.getPlayers().get(4).setScore(35);
+      ArrayList<String> playerNames = controller.displayScoreboard();
+
+      assertThat(playerNames.get(1)).isEqualTo("Player1");
+      assertThat(playerNames.get(0)).isEqualTo("Player2");
+      assertThat(playerNames.get(4)).isEqualTo("Player3");
+
+
 
     }
 }
