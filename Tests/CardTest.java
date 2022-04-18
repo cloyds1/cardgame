@@ -43,7 +43,7 @@ public class CardTest {
 
   @Test
   void valueTestKing() {
-    assertThat(king.getRank_value()).isEqualTo(10);
+    assertThat(king.getRank_value()).isEqualTo(0);
   }
 
   @Test
