@@ -23,7 +23,6 @@ public class Main {
             while (controller.holeContinues()) {
                 controller.playGame();
             }
-
         }
         controller.endGame();
     }

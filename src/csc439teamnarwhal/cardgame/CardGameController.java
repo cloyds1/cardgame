@@ -32,12 +32,20 @@ public class CardGameController {
         return deck;
     }
 
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
     public void setContinueHole(boolean continueHole) {
         this.continueHole = continueHole;
     }
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
     }
 
     /**
@@ -55,6 +63,9 @@ public class CardGameController {
             view.setInput();
             numPlayers = Integer.parseInt(view.getInput());
         }
+        createPlayers(numPlayers);
+        createAndDealDeck();
+
         view.setText("How many holes would you like to play?");
         view.setInput();
         holesLeft = Integer.parseInt(view.getInput());
@@ -63,18 +74,10 @@ public class CardGameController {
             view.setInput();
             holesLeft = Integer.parseInt(view.getInput());
         }
-        //use two decks for more than 4 players
-        if (numPlayers > 4) {
-            createDoubleDeck(deck);
-        }
-        //shuffle the deck, create the players and deal them cards. Flip the top card over to create
-        // the discard pile
-        Collections.shuffle(deck.getDeck());
-        createPlayers(numPlayers);
-        deck.dealCards(players);
-        deckIterator = deck.getDeck().listIterator();
-        deck.flipTopCard(deckIterator);
+
+
     }
+
 
 
     /**
@@ -163,35 +166,36 @@ public class CardGameController {
             }
             continueHole = false;
             System.out.println("End of round");
-            showCurrentStanding();
             decrementHolesLeft();
             if (holesLeft == 0) {
                 keepPlaying = false;
-                endGame();
                 return;
             }
             deck = new Deck();
-            Collections.shuffle(deck.getDeck());
-            deck.dealCards(players);
-            deckIterator = deck.getDeck().listIterator();
-            deck.flipTopCard(deckIterator);
+            createAndDealDeck();
         }
     }
 
+
+    public void createAndDealDeck() {
+        //use two decks for more than 4 players
+        if (numPlayers > 4) {
+            createDoubleDeck(deck);
+        }
+        //shuffle the deck, create the players and deal them cards. Flip the top card over to create
+        // the discard pile
+        Collections.shuffle(deck.getDeck());
+
+        deck.dealCards(players);
+        deckIterator = deck.getDeck().listIterator();
+        deck.flipTopCard(deckIterator);
+    }
 
     private void decrementHolesLeft() {
         holesLeft--;
     }
 
-    /**
-     * Method that displays player scores after every round
-     */
-    private void showCurrentStanding() {
-        view.setText("The current standing after the previous round is: ");
-        for (int i = 0; i < players.size(); i++) {
-            view.setText(players.get(i).getName() + ": " + players.get(i).getScore());
-        }
-    }
+
 
     /**
      * Method to display welcome screen to player
