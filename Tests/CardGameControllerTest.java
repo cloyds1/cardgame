@@ -17,13 +17,13 @@ public class CardGameControllerTest {
   Deck deck2 = new Deck();
 
   @Test
-  void gameSetupTest(){
+  void gameSetupTest() {
     //not sure how to test inputs from user
     //controller.gameSetup();
   }
 
   @Test
-  void createPlayersTest(){
+  void createPlayersTest() {
     controller.createPlayers(5);
     assertThat(controller.getPlayers().get(3).getName()).isEqualTo("Player4");
     assertThat(controller.getPlayers().size()).isEqualTo(5);
@@ -72,7 +72,7 @@ public class CardGameControllerTest {
   }
 
   @Test
-  void switchCardInHandTest(){
+  void switchCardInHandTest() {
     Card card = new Card(Rank.ACE, Suit.CLUBS);
     controller.createPlayers(5);
     Collections.shuffle(controller.getDeck().getDeck());
@@ -91,14 +91,15 @@ public class CardGameControllerTest {
     assertThat(controller.getPlayers().get(0).getHand().get(4).equals(card)).isTrue();
     controller.switchCardInHand(6, card, deckIterator, 0);
     assertThat(controller.getPlayers().get(0).getHand().get(5).equals(card)).isTrue();
-    }
-
-  @Test
-  void gameContinues() {
   }
 
   @Test
-  void createAndDealDeckTest(){
+  void gameContinues() {
+    //not sure how to test display from this method
+  }
+
+  @Test
+  void createAndDealDeckTest() {
     controller.setNumPlayers(4);
     controller.createPlayers(4);
     controller.createAndDealDeck();
@@ -134,5 +135,12 @@ public class CardGameControllerTest {
     controller.createPlayers(5);
     controller.createAndDealDeck();
     assertThat(controller.getDeck().getDeck().size()).isEqualTo(74);
+  }
+
+  @Test
+  void decrementHolesLeftTest() {
+    controller.setHolesLeft(4);
+    controller.decrementHolesLeft();
+    assertThat(controller.getHolesLeft() == 3);
   }
 }
