@@ -28,10 +28,6 @@ public class Deck {
     }
   }
 
-  //this method is not currently used
-  /*public Deck(ArrayList<Card> deck) {
-    deckOfCards = deck;
-  }*/
 
   public ArrayList<Card> getDeck() {
     return deckOfCards;
